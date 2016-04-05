@@ -1,8 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
+import java.util.*;
 
 public class UserInterface{
+
+    public JLabel[] tempGameGrid;
+    public JLabel[][] gameGrid= new JLabel[9][9];
+    private static final int GRID = 9;
 
     public UserInterface(int width,int height){
 
@@ -34,8 +39,19 @@ public class UserInterface{
 
         menu.setVisible(true);
 
-        JLabel gameGrid = new JLabel();
-        sudoku.add(gameGrid,BorderLayout.CENTER);
+        JLabel center = new JLabel();
+        sudoku.add(center,BorderLayout.CENTER);
+        center.setLayout(new GridLayout(3,3));
+
+        tempGameGrid = Utilities.createGrid(center);
+
+        for(int i =0; i < GRID;i++){
+            gameGrid[i]= (Utilities.createGrid(tempGameGrid[i]));
+        }
+
+        center.validate();
+
+
 
         sudoku.setVisible(true);
     }
