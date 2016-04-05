@@ -43,10 +43,10 @@ public class UserInterface{
         sudoku.add(center,BorderLayout.CENTER);
         center.setLayout(new GridLayout(3,3));
 
-        tempGameGrid = Utilities.createGrid(center);
+        tempGameGrid = Utilities.createBigGrid(center);
 
         for(int i =0; i < GRID;i++){
-            gameGrid[i]= (Utilities.createGrid(tempGameGrid[i]));
+            gameGrid[i]= (Utilities.createSmallGrid(tempGameGrid[i]));
         }
 
         center.validate();
