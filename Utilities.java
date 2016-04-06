@@ -27,15 +27,15 @@ public class Utilities{
     public static JLabel[] createSmallGrid(JLabel label){
 
         JLabel[] labelArray = new JLabel[GRID];
-        label.setLayout(new GridLayout(3,3));
+        label.setLayout(new GridLayout(3,3,2,2));
 
         for(int i=0; i < GRID ; i++){
             labelArray[i] = new JLabel();
+            labelArray[i].setBackground(Color.red);
+            labelArray[i].setOpaque(true);
             label.add(labelArray[i]);
         }
 
-        labelArray[4].setBackground(Color.red);
-        labelArray[4].setOpaque(true);
         /*Update screen*/
         label.validate();
 

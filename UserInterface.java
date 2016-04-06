@@ -39,9 +39,17 @@ public class UserInterface{
 
         menu.setVisible(true);
 
+        /*Creating empty label at top, which will be used for end winning message*/
+        JLabel topLabel = new JLabel();
+        sudoku.add(topLabel,BorderLayout.NORTH);
+        topLabel.setPreferredSize(new Dimension(width,height/4));
+        topLabel.setVisible(true);
+
+        /*Creating game Grid , which will be in center*/
         JLabel center = new JLabel();
         sudoku.add(center,BorderLayout.CENTER);
         center.setLayout(new GridLayout(3,3));
+        center.setPreferredSize(new Dimension(width,height/2));
 
         tempGameGrid = Utilities.createBigGrid(center);
 
@@ -50,7 +58,7 @@ public class UserInterface{
         }
 
         center.validate();
-
+        sudoku.pack();
 
 
         sudoku.setVisible(true);
