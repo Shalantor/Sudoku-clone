@@ -50,6 +50,7 @@ public class Utilities{
 
         JButton tempButton;
         ImageIcon tempImage;
+        JCheckBox tempCheckBox;
 
         /*First add the buttons with the numbers*/
         for(int i=0; i < GRID; i++){
@@ -58,14 +59,31 @@ public class Utilities{
             label.add(tempButton);
         }
 
-        /*Then add icon buttons*/
+        /*Then add rubber button*/
         tempImage = new ImageIcon("rubber.png");
         tempImage = getScaledImage(tempImage.getImage(),20,20);
         tempButton = new JButton(tempImage);
         tempButton.setPreferredSize(new Dimension(70,40));
         label.add(tempButton);
 
+        /*Then add undo button*/
+        tempImage = new ImageIcon("undo.png");
+        tempImage = getScaledImage(tempImage.getImage(),20,20);
+        tempButton = new JButton(tempImage);
+        tempButton.setPreferredSize(new Dimension(70,40));
+        label.add(tempButton);
 
+        /*Add checkbox for solution verification*/
+        tempCheckBox = new JCheckBox("    Verify against Solution");
+        tempCheckBox.setPreferredSize(new Dimension(295,40));
+        label.add(tempCheckBox);
+
+        /*Add button to show solution*/
+        tempImage = new ImageIcon("solve.png");
+        tempImage = getScaledImage(tempImage.getImage(),20,20);
+        tempButton = new JButton(tempImage);
+        tempButton.setPreferredSize(new Dimension(70,40));
+        label.add(tempButton);
 
         /*Update scren*/
         label.validate();
