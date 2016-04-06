@@ -14,6 +14,7 @@ public class Utilities{
 
         for(int i=0 ; i < GRID ; i++){
             labelArray[i] = new JLabel();
+            labelArray[i].setBorder(new BevelBorder(BevelBorder.RAISED));
             label.add(labelArray[i]);
         }
 
@@ -31,7 +32,8 @@ public class Utilities{
 
         for(int i=0; i < GRID ; i++){
             labelArray[i] = new JLabel();
-            labelArray[i].setBackground(Color.red);
+            labelArray[i].setBorder(BorderFactory.createLineBorder(Color.cyan));
+            labelArray[i].setBackground(new Color(255,255,255));
             labelArray[i].setOpaque(true);
             label.add(labelArray[i]);
         }
