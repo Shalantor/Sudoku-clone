@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 import java.util.*;
+import java.awt.image.*;
 
 public class Utilities{
 
@@ -43,5 +44,48 @@ public class Utilities{
 
         return labelArray;
     }
+
+    /*Creates the buttons available for playing for the user*/
+    public static void createPlayButtons(JLabel label){
+
+        JButton tempButton;
+        ImageIcon tempImage;
+
+        /*First add the buttons with the numbers*/
+        for(int i=0; i < GRID; i++){
+            tempButton = new JButton("" + (i+1));
+            tempButton.setPreferredSize(new Dimension(70,40));
+            label.add(tempButton);
+        }
+
+        /*Then add icon buttons*/
+        tempImage = new ImageIcon("rubber.png");
+        tempImage = getScaledImage(tempImage.getImage(),20,20);
+        tempButton = new JButton(tempImage);
+        tempButton.setPreferredSize(new Dimension(70,40));
+        label.add(tempButton);
+
+
+
+        /*Update scren*/
+        label.validate();
+
+
+    }
+
+    private static ImageIcon getScaledImage(Image srcImg, int w, int h){
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+        ImageIcon returnImage;
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+
+        returnImage = new ImageIcon(resizedImg);
+
+        return returnImage;
+    }
+
 
 }

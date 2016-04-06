@@ -47,29 +47,39 @@ public class UserInterface{
         topLabel.setOpaque(true);
         topLabel.setVisible(true);
 
-        /*Creating label at bottom, which will be used fot the buttons*/
-        JLabel bottomLabel = new JLabel();
-        sudoku.add(bottomLabel,BorderLayout.SOUTH);
-        bottomLabel.setPreferredSize(new Dimension(width,height/6));
-        bottomLabel.setBackground(new Color(223,223,223));
-        bottomLabel.setOpaque(true);
-        bottomLabel.setVisible(true);
-
         /*Creating game Grid , which will be in center*/
         JLabel center = new JLabel();
         sudoku.add(center,BorderLayout.CENTER);
         center.setLayout(new GridLayout(3,3,2,2));
-        center.setPreferredSize(new Dimension(width,4*height/6));
+        center.setPreferredSize(new Dimension(width,height/2));
         center.setBackground(new Color(223,223,223));
         center.setOpaque(true);
 
+        /*Create main grid of game map*/
         tempGameGrid = Utilities.createBigGrid(center);
 
+        /*Create smaller grids*/
         for(int i =0; i < GRID;i++){
             gameGrid[i]= (Utilities.createSmallGrid(tempGameGrid[i]));
         }
 
         center.validate();
+
+        /*Creating label at bottom, which will be used fot the buttons*/
+        JLabel bottomLabel = new JLabel();
+        sudoku.add(bottomLabel,BorderLayout.SOUTH);
+        bottomLabel.setPreferredSize(new Dimension(width,height/6));
+
+        /*set background color of bottomLabel*/
+        bottomLabel.setBackground(new Color(223,223,223));
+        bottomLabel.setOpaque(true);
+
+        /*Add components*/
+        bottomLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        Utilities.createPlayButtons(bottomLabel);
+        bottomLabel.setVisible(true);
+
+        /*Adjust window size*/
         sudoku.pack();
 
 
