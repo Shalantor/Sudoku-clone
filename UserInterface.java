@@ -42,14 +42,20 @@ public class UserInterface{
         /*Creating empty label at top, which will be used for end winning message*/
         JLabel topLabel = new JLabel();
         sudoku.add(topLabel,BorderLayout.NORTH);
-        topLabel.setPreferredSize(new Dimension(width,height/4));
+        topLabel.setPreferredSize(new Dimension(width,height/6));
         topLabel.setVisible(true);
+
+        /*Creating label at bottom, which will be used fot the buttons*/
+        JLabel bottomLabel = new JLabel();
+        sudoku.add(bottomLabel,BorderLayout.SOUTH);
+        bottomLabel.setPreferredSize(new Dimension(width,height/6));
+        bottomLabel.setVisible(true);
 
         /*Creating game Grid , which will be in center*/
         JLabel center = new JLabel();
         sudoku.add(center,BorderLayout.CENTER);
-        center.setLayout(new GridLayout(3,3));
-        center.setPreferredSize(new Dimension(width,height/2));
+        center.setLayout(new GridLayout(3,3,2,2));
+        center.setPreferredSize(new Dimension(width,4*height/6));
 
         tempGameGrid = Utilities.createBigGrid(center);
 

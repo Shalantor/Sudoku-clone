@@ -1,5 +1,5 @@
 public class Sudoku{
     public static void main(String args[]){
-        UserInterface sudoku = new UserInterface(600,500);
+        UserInterface sudoku = new UserInterface(600,600);
     }
 }
