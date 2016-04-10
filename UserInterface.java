@@ -39,7 +39,12 @@ public class UserInterface{
         easy.addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent e){
-                UserInterface.this.setUpGame("easy");
+                try{
+                    UserInterface.this.setUpGame("easy");
+                }
+                catch(IOException ex){
+                    System.out.println("Gamo ton xristo sou me ta exception");
+                }
             }
 
         });
@@ -50,7 +55,13 @@ public class UserInterface{
         intermediate.addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent e){
-                UserInterface.this.setUpGame("intermediate");
+
+                try{
+                    UserInterface.this.setUpGame("intermediate");
+                }
+                catch(IOException ex){
+                    System.out.println("Gamo ton xristo sou me ta exception");
+                }
             }
 
         });
@@ -61,7 +72,13 @@ public class UserInterface{
         expert.addActionListener(new ActionListener(){
 
             public void actionPerformed(ActionEvent e){
-                UserInterface.this.setUpGame("expert");
+
+                try{
+                    UserInterface.this.setUpGame("easy");
+                }
+                catch(IOException ex){
+                    System.out.println("Gamo ton xristo sou me ta exception");
+                }
             }
 
         });
@@ -117,13 +134,12 @@ public class UserInterface{
         sudoku.setVisible(true);
     }
 
-    public void setUpGame(String difficulty){
+    public void setUpGame(String difficulty) throws IOException{
 
         /*Used to store numbers*/
-        String[] lines = new String[9];
+        String line ;
         URL link = null;
         BufferedReader in = null;
-        int i = 0;
 
         /*getting url and opening stream to read from it*/
         try{
@@ -142,6 +158,45 @@ public class UserInterface{
             System.exit(0);
         }
 
+        /*position = where to place character
+        row = which row we are , so we can adjust position(THIS IS NOT THE OVERALL ROW!!!)
+        its just the row in the grid we are currently in
+        column = which column we are so we can adjust position
+        adjRow = used to adjust position when we switch between 2 big grids
+        the reason i filled the game map this way was because we are  using gridlayout,
+        there was no way to put the labels in an array where we could iterate over it like a
+        normal two dimensional array*/
+        int position = 0;
+        int row = 0;
+        int column = 0;
+        int adjRow = 0;
+        while( (line = in.readLine() ) != null){
+
+            if(row < 3){                            //still in same grid
+                position =  row * 3 + adjRow;       //instantiate position(far left side)
+                row++;                              //increment row for next iteration
+            }
+            else if(row == 3){                      //grid is completed go to next grid
+                adjRow += 27;                       //adjust starting position
+                row = 0;                            //row in  big grid
+            }
+
+            //TODO:check if text can be centered with a better method than adding spaces*/
+
+            for(int i = 0; i < line.length(); i++){
+                gameGrid[position].setText("      " + line.charAt(i));
+                column ++ ;
+                if(column == 3){                        //we will get to next big grid on the right side
+                    position += 7;                      //jump to next Big grid (right side)
+                    column = 0;
+                }
+                else{                                   //else if in same grid, just increment position
+                    position++;
+                }
+            }
+
+
+        }
 
         /*Close stream*/
         try{
@@ -151,6 +206,7 @@ public class UserInterface{
             System.out.println("IOException when closing stream");
             System.exit(0);
         }
+
     }
 
 
