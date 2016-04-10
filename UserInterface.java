@@ -187,12 +187,15 @@ public class UserInterface{
                 position = adjRow;
             }
 
-            System.out.println("POSITION: " + position);
 
             //TODO:check if text can be centered with a better method than adding spaces*/
 
             for(int i = 0; i < line.length(); i++){
-                gameGrid[position].setText("      " + line.charAt(i));  //6 spaces
+                if( line.charAt(i) != '.'){
+                    gameGrid[position].setText("      " + line.charAt(i));  //6 spaces
+                    gameGrid[position].setBackground(new Color(230,230,230));
+                }
+
                 column ++ ;
                 if(column == 3){                        //we will get to next big grid on the right side
                     position += 7;                      //jump to next Big grid (right side)
