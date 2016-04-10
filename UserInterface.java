@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
 import java.util.*;
+import java.awt.event.*;
+import java.net.*;
+import java.io.*;
 
 public class UserInterface{
 
@@ -30,12 +33,38 @@ public class UserInterface{
         menu.add(newGame);
 
         /*drop down menu*/
+        /*difficulty = easy*/
         JMenuItem easy = new JMenuItem("Easy");
         newGame.add(easy);
+        easy.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+                UserInterface.this.setUpGame("easy");
+            }
+
+        });
+
+        /*for intermediate difficulty*/
         JMenuItem intermediate = new JMenuItem("Intermediate");
         newGame.add(intermediate);
+        intermediate.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+                UserInterface.this.setUpGame("intermediate");
+            }
+
+        });
+
+        /*For expert difficulty*/
         JMenuItem expert = new JMenuItem("Expert");
         newGame.add(expert);
+        expert.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+                UserInterface.this.setUpGame("expert");
+            }
+
+        });
 
         menu.setVisible(true);
 
@@ -84,6 +113,59 @@ public class UserInterface{
 
 
         sudoku.setVisible(true);
+    }
+
+    public void setUpGame(String difficulty){
+
+        /*Used to store numbers*/
+        String[] lines = new String[9];
+        URL link = null;
+        BufferedReader in = null;
+
+        /*getting url and opening stream to read from it*/
+        try{
+            link = new URL("http://gthanos.inf.uth.gr/~gthanos/sudoku/exec.php?difficulty=" + difficulty);
+        }
+        catch(MalformedURLException ex){
+            System.out.println("Malformed url");
+            System.exit(0);
+        }
+
+        try{
+            in = new BufferedReader(new InputStreamReader(link.openStream()));
+        }
+        catch(IOException ex){
+            System.out.println("IOException when trying to open stream");
+            System.exit(0);
+        }
+
+
+        /*Storing values read*/
+        for(int i=0; i < lines.length ; i++){
+
+            try{
+                lines[i] = in.readLine() ;
+            }
+            catch(IOException ex){
+                System.out.println("IOException occurred when reading from stream");
+                System.exit(0);
+            }
+
+        }
+
+        /*Close stream*/
+        try{
+            in.close();
+        }
+        catch(IOException ex){
+            System.out.println("IOException when closing stream");
+            System.exit(0);
+        }
+
+        /*Just  for testing purposes*/
+        System.out.println("Got values");
+
+
     }
 
 }
