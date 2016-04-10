@@ -26,17 +26,16 @@ public class Utilities{
     }
 
     /*Creates the smaller grid for the actual game field*/
-    public static JLabel[] createSmallGrid(JLabel label){
+    public static JLabel[] createSmallGrid(JLabel label,JLabel[] labelArray,int start){
 
-        JLabel[] labelArray = new JLabel[GRID];
         label.setLayout(new GridLayout(3,3,2,2));
 
         for(int i=0; i < GRID ; i++){
-            labelArray[i] = new JLabel();
-            labelArray[i].setBorder(BorderFactory.createLineBorder(Color.cyan));
-            labelArray[i].setBackground(new Color(255,255,255));
-            labelArray[i].setOpaque(true);
-            label.add(labelArray[i]);
+            labelArray[start + i] = new JLabel();
+            labelArray[start + i].setBorder(BorderFactory.createLineBorder(Color.cyan));
+            labelArray[start + i].setBackground(new Color(255,255,255));
+            labelArray[start + i].setOpaque(true);
+            label.add(labelArray[start + i]);
         }
 
         /*Update screen*/

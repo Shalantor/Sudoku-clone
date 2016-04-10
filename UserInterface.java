@@ -9,7 +9,7 @@ import java.io.*;
 public class UserInterface{
 
     public JLabel[] tempGameGrid;
-    public JLabel[][] gameGrid= new JLabel[9][9];
+    public JLabel[] gameGrid= new JLabel[81];
     private static final int GRID = 9;
 
     public UserInterface(int width,int height){
@@ -88,8 +88,10 @@ public class UserInterface{
         tempGameGrid = Utilities.createBigGrid(center);
 
         /*Create smaller grids*/
-        for(int i =0; i < GRID;i++){
-            gameGrid[i]= (Utilities.createSmallGrid(tempGameGrid[i]));
+        int j = 0 ;
+        for(int i =0; j < GRID; i += 9){
+            gameGrid =  Utilities.createSmallGrid(tempGameGrid[j],gameGrid,i);
+            j++;
         }
 
         center.validate();
@@ -121,6 +123,7 @@ public class UserInterface{
         String[] lines = new String[9];
         URL link = null;
         BufferedReader in = null;
+        int i = 0;
 
         /*getting url and opening stream to read from it*/
         try{
@@ -140,19 +143,6 @@ public class UserInterface{
         }
 
 
-        /*Storing values read*/
-        for(int i=0; i < lines.length ; i++){
-
-            try{
-                lines[i] = in.readLine() ;
-            }
-            catch(IOException ex){
-                System.out.println("IOException occurred when reading from stream");
-                System.exit(0);
-            }
-
-        }
-
         /*Close stream*/
         try{
             in.close();
@@ -161,11 +151,8 @@ public class UserInterface{
             System.out.println("IOException when closing stream");
             System.exit(0);
         }
-
-        /*Just  for testing purposes*/
-        System.out.println("Got values");
-
-
     }
+
+
 
 }
