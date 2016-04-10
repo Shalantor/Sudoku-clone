@@ -43,7 +43,8 @@ public class UserInterface{
                     UserInterface.this.setUpGame("easy");
                 }
                 catch(IOException ex){
-                    System.out.println("Gamo ton xristo sou me ta exception");
+                    System.out.println("IOException occurred");
+                    System.exit(0);
                 }
             }
 
@@ -60,7 +61,8 @@ public class UserInterface{
                     UserInterface.this.setUpGame("intermediate");
                 }
                 catch(IOException ex){
-                    System.out.println("Gamo ton xristo sou me ta exception");
+                    System.out.println("IOException occurred");
+                    System.exit(0);
                 }
             }
 
@@ -77,7 +79,8 @@ public class UserInterface{
                     UserInterface.this.setUpGame("easy");
                 }
                 catch(IOException ex){
-                    System.out.println("Gamo ton xristo sou me ta exception");
+                    System.out.println("IOException occurred");
+                    System.exit(0);
                 }
             }
 
@@ -172,19 +175,24 @@ public class UserInterface{
         int adjRow = 0;
         while( (line = in.readLine() ) != null){
 
+            System.out.println(line);
+
             if(row < 3){                            //still in same grid
                 position =  row * 3 + adjRow;       //instantiate position(far left side)
-                row++;                              //increment row for next iteration
             }
-            else if(row == 3){                      //grid is completed go to next grid
+
+            if(row == 3){                      //grid is completed go to next grid
                 adjRow += 27;                       //adjust starting position
                 row = 0;                            //row in  big grid
+                position = adjRow;
             }
+
+            System.out.println("POSITION: " + position);
 
             //TODO:check if text can be centered with a better method than adding spaces*/
 
             for(int i = 0; i < line.length(); i++){
-                gameGrid[position].setText("      " + line.charAt(i));
+                gameGrid[position].setText("      " + line.charAt(i));  //6 spaces
                 column ++ ;
                 if(column == 3){                        //we will get to next big grid on the right side
                     position += 7;                      //jump to next Big grid (right side)
@@ -194,10 +202,10 @@ public class UserInterface{
                     position++;
                 }
             }
+            row++;
 
 
         }
-
         /*Close stream*/
         try{
             in.close();
