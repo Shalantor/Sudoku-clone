@@ -11,6 +11,7 @@ public class UserInterface{
     public JLabel[] tempGameGrid;
     public JLabel[] gameGrid= new JLabel[81];
     private static final int GRID = 9;
+    private JLabel activeLabel = null;
 
     public UserInterface(int width,int height){
 
@@ -116,6 +117,11 @@ public class UserInterface{
 
         center.validate();
 
+        /*Add actionlisteners to gamegrid
+        for( JLabel label : gamegrid){
+            label.setAction(sameNumber(label));
+        }*/
+
         /*Creating label at bottom, which will be used fot the buttons*/
         JLabel bottomLabel = new JLabel();
         sudoku.add(bottomLabel,BorderLayout.SOUTH);
@@ -136,6 +142,13 @@ public class UserInterface{
 
         sudoku.setVisible(true);
     }
+
+    /*class sameNumber extends AbstractAction{
+        public void sameNumber(JLabel label){
+
+            label.setBackground(Color.yellow);
+            label.setOpaque(true);
+        }*/
 
     public void setUpGame(String difficulty) throws IOException{
 
@@ -174,8 +187,6 @@ public class UserInterface{
         int column = 0;
         int adjRow = 0;
         while( (line = in.readLine() ) != null){
-
-            System.out.println(line);
 
             if(row < 3){                            //still in same grid
                 position =  row * 3 + adjRow;       //instantiate position(far left side)

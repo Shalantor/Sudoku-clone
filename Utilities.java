@@ -59,14 +59,14 @@ public class Utilities{
         }
 
         /*Then add rubber button*/
-        tempImage = new ImageIcon("rubber.png");
+        tempImage = new ImageIcon("images/rubber.png");
         tempImage = getScaledImage(tempImage.getImage(),20,20);
         tempButton = new JButton(tempImage);
         tempButton.setPreferredSize(new Dimension(70,40));
         label.add(tempButton);
 
         /*Then add undo button*/
-        tempImage = new ImageIcon("undo.png");
+        tempImage = new ImageIcon("images/undo.png");
         tempImage = getScaledImage(tempImage.getImage(),20,20);
         tempButton = new JButton(tempImage);
         tempButton.setPreferredSize(new Dimension(70,40));
@@ -78,7 +78,7 @@ public class Utilities{
         label.add(tempCheckBox);
 
         /*Add button to show solution*/
-        tempImage = new ImageIcon("solve.png");
+        tempImage = new ImageIcon("images/solve.png");
         tempImage = getScaledImage(tempImage.getImage(),20,20);
         tempButton = new JButton(tempImage);
         tempButton.setPreferredSize(new Dimension(70,40));
