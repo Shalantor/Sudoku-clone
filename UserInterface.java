@@ -8,10 +8,13 @@ import java.io.*;
 
 public class UserInterface{
 
+    /*TODO:remove tempGameGrid*/
     public JLabel[] tempGameGrid;
+    private JLabel[][][] isMoveCorrect ;
     public JLabel[] gameGrid= new JLabel[81];
     private static final int GRID = 9;
     private JLabel activeLabel = null;
+    private String linkData;
 
     public UserInterface(int width,int height){
 
@@ -49,7 +52,6 @@ public class UserInterface{
                     System.exit(0);
                 }
             }
-
         });
 
         /*for intermediate difficulty*/
@@ -120,11 +122,6 @@ public class UserInterface{
 
         center.validate();
 
-        /*Add actionlisteners to gamegrid
-        for( JLabel label : gamegrid){
-            label.setAction(sameNumber(label));
-        }*/
-
         /*Creating label at bottom, which will be used fot the buttons*/
         JLabel bottomLabel = new JLabel();
         sudoku.add(bottomLabel,BorderLayout.SOUTH);
@@ -141,7 +138,6 @@ public class UserInterface{
 
         /*Adjust window size*/
         sudoku.pack();
-
 
         sudoku.setVisible(true);
     }
@@ -200,8 +196,6 @@ public class UserInterface{
                 row = 0;                            //row in  big grid
                 position = adjRow;
             }
-
-
             //TODO:check if text can be centered with a better method than adding spaces*/
 
             for(int i = 0; i < line.length(); i++){
@@ -209,7 +203,6 @@ public class UserInterface{
                     gameGrid[position].setText("      " + line.charAt(i));  //6 spaces
                     gameGrid[position].setBackground(new Color(230,230,230));
                 }
-
                 column ++ ;
                 if(column == 3){                        //we will get to next big grid on the right side
                     position += 7;                      //jump to next Big grid (right side)
@@ -220,8 +213,6 @@ public class UserInterface{
                 }
             }
             row++;
-
-
         }
         /*Close stream*/
         try{
@@ -232,8 +223,7 @@ public class UserInterface{
             System.exit(0);
         }
 
+        isMoveCorrect = Utilities.createCheckArrays(gameGrid);
     }
-
-
 
 }

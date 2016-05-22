@@ -90,6 +90,7 @@ public class Utilities{
 
     }
 
+    /*Scale image for buttons*/
     private static ImageIcon getScaledImage(Image srcImg, int w, int h){
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -106,12 +107,75 @@ public class Utilities{
 
     /*Instantiate board before filling it*/
     public static void emptyBoard(JLabel[] board){
-
+        /*Empty board*/
         for(JLabel label : board){
             label.setText("");
             label.setBackground(new Color(255,255,255));
         }
     }
 
+    public static JLabel[][][] createCheckArrays(JLabel[] board){
 
+        int row = 0,column = 0,iterator = 0;
+        JLabel[][] checkSameBox = new JLabel[9][9];
+        JLabel[][] checkSameRowOrColumn = new JLabel[9][9];
+
+        /*First create 2darray based on squares*/
+        for(; iterator < board.length; iterator++){
+            checkSameBox[row][column] = board[iterator];
+            int newRow = iterator % 9;
+            column++;
+            if( newRow != row){
+                row = newRow;
+                column = 0;
+            }
+        }
+
+        /*Then create 2dArray based on columns and rows*/
+        row = 0;
+        column = 0;
+        int box = 0,boxRow = 0;
+        int rowUpperBound = 0;
+        int boxUpperBound = 0;
+        int boxStart = 0;
+        int times = 3;
+
+        while(true){
+            System.out.println("BOX: " + box + " BOXROW: " + boxRow);
+            checkSameRowOrColumn[row][column] = checkSameBox[box][boxRow];
+            /*Update positions of first array*/
+            column++;
+            if(column == 9){
+                column = 0;
+                row ++;
+                if(row == 9){
+                    break;
+                }
+            }
+            /*Update positions of second array*/
+            /*Next row*/
+            boxRow = (boxRow + 1) % 3;
+            if(boxRow == 0){
+                box = (box + 1) % 3;
+                box += boxUpperBound;
+            }
+            boxRow += rowUpperBound;
+            if(column == 0){
+                System.out.println("Changing boxrow");
+                rowUpperBound += 3;
+                boxRow = rowUpperBound;
+            }
+            /*Case where we have processed 3 times consecutively the rows*/
+            if(row == times){
+                System.out.println("Changing row");
+                times += 3;
+                boxUpperBound += 3;
+                rowUpperBound = 0;
+                boxRow = 0;
+                box = row;
+            }
+        }
+        JLabel[][][] returnArray = {checkSameBox, checkSameRowOrColumn};
+        return returnArray;
+    }
 }
