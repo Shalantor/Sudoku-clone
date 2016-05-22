@@ -104,5 +104,14 @@ public class Utilities{
         return returnImage;
     }
 
+    /*Instantiate board before filling it*/
+    public static void emptyBoard(JLabel[] board){
+
+        for(JLabel label : board){
+            label.setText("");
+            label.setBackground(new Color(255,255,255));
+        }
+    }
+
 
 }
