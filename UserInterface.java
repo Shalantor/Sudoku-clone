@@ -41,6 +41,7 @@ public class UserInterface{
 
             public void actionPerformed(ActionEvent e){
                 try{
+                    Utilities.emptyBoard(gameGrid);
                     UserInterface.this.setUpGame("easy");
                 }
                 catch(IOException ex){
@@ -59,6 +60,7 @@ public class UserInterface{
             public void actionPerformed(ActionEvent e){
 
                 try{
+                    Utilities.emptyBoard(gameGrid);
                     UserInterface.this.setUpGame("intermediate");
                 }
                 catch(IOException ex){
@@ -77,6 +79,7 @@ public class UserInterface{
             public void actionPerformed(ActionEvent e){
 
                 try{
+                    Utilities.emptyBoard(gameGrid);
                     UserInterface.this.setUpGame("easy");
                 }
                 catch(IOException ex){
