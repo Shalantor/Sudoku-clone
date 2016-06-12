@@ -31,7 +31,7 @@ public class Utilities{
         label.setLayout(new GridLayout(3,3,2,2));
 
         for(int i=0; i < GRID ; i++){
-            labelArray[start + i] = new JLabel();
+            labelArray[start + i] = new JLabel("",SwingConstants.CENTER);
             labelArray[start + i].setBorder(BorderFactory.createLineBorder(Color.cyan));
             labelArray[start + i].setBackground(new Color(255,255,255));
             labelArray[start + i].setOpaque(true);

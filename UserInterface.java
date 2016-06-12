@@ -200,7 +200,7 @@ public class UserInterface{
 
             for(int i = 0; i < line.length(); i++){
                 if( line.charAt(i) != '.'){
-                    gameGrid[position].setText("      " + line.charAt(i));  //6 spaces
+                    gameGrid[position].setText(" " + line.charAt(i) + " ");  //6 spaces
                     gameGrid[position].setBackground(new Color(230,230,230));
                 }
                 column ++ ;
