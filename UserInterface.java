@@ -15,6 +15,7 @@ public class UserInterface{
     private static final int GRID = 9;
     private JLabel activeLabel = null;
     private String linkData;
+    private JButton[] buttons;
 
     public UserInterface(int width,int height){
 
@@ -162,8 +163,20 @@ public class UserInterface{
 
         /*Add components*/
         bottomLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        Utilities.createPlayButtons(bottomLabel);
+        buttons = Utilities.createPlayButtons(bottomLabel);
         bottomLabel.setVisible(true);
+
+        /*Add actionlisteners to buttons*/
+        for(int i = 0; i < 9; i++){
+            String text = buttons[i].getText();
+            buttons[i].addActionListener( new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    if(activeLabel != null && activeLabel.getText().length() != 3){//check for valid field
+                        activeLabel.setText(text);
+                    }
+                }
+            });
+        }
 
         /*Adjust window size*/
         sudoku.pack();
