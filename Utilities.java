@@ -114,6 +114,7 @@ public class Utilities{
         }
     }
 
+    /*Create arrays for position checks on boards, like same row and column*/
     public static JLabel[][][] createCheckArrays(JLabel[] board){
 
         int row = 0,column = 0,iterator = 0;
@@ -141,7 +142,7 @@ public class Utilities{
         int times = 3;
 
         while(true){
-            System.out.println("BOX: " + box + " BOXROW: " + boxRow);
+            //TODO: Remove when finishedSystem.out.println("BOX: " + box + " BOXROW: " + boxRow);
             checkSameRowOrColumn[row][column] = checkSameBox[box][boxRow];
             /*Update positions of first array*/
             column++;
@@ -161,13 +162,13 @@ public class Utilities{
             }
             boxRow += rowUpperBound;
             if(column == 0){
-                System.out.println("Changing boxrow");
+                //System.out.println("Changing boxrow");
                 rowUpperBound += 3;
                 boxRow = rowUpperBound;
             }
             /*Case where we have processed 3 times consecutively the rows*/
             if(row == times){
-                System.out.println("Changing row");
+                //System.out.println("Changing row");
                 times += 3;
                 boxUpperBound += 3;
                 rowUpperBound = 0;

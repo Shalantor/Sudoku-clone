@@ -10,7 +10,7 @@ public class UserInterface{
 
     /*TODO:remove tempGameGrid*/
     public JLabel[] tempGameGrid;
-    private JLabel[][][] isMoveCorrect ;
+    private JLabel[][][] isMoveCorrect ;        //First 2d array is for same box, second is for row and columns
     public JLabel[] gameGrid= new JLabel[81];
     private static final int GRID = 9;
     private JLabel activeLabel = null;
