@@ -124,6 +124,9 @@ public class UserInterface{
         for(JLabel label : gameGrid){
             label.addMouseListener(new MouseListener(){
                 public void mouseClicked(MouseEvent e){
+                    if(activeLabel == label){           //check if this is the activeLabel
+                        return;
+                    }
                     label.setBackground(new Color(240,240,148));
                     if(activeLabel != null ){
                         if(activeLabel.getText().length() > 1){              //Color of label is gray
