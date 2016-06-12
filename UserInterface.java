@@ -16,7 +16,8 @@ public class UserInterface{
     private JLabel activeLabel = null;
     private String linkData;
     private JButton[] buttons;
-    private ArrayList<JLabel> sameColors = new ArrayList<JLabel>();
+    private ArrayList<JLabel> sameColors = new ArrayList<JLabel>();//Use for marking labels with same content when selecting
+    private ArrayList<JLabel> redColor = new ArrayList<JLabel>();//use when input is not valid for that field
 
     public UserInterface(int width,int height){
 
@@ -205,11 +206,41 @@ public class UserInterface{
 
         /*Add actionlisteners to buttons*/
         for(int i = 0; i < 9; i++){
-            String text = buttons[i].getText();
+            String buttonText = buttons[i].getText();
             buttons[i].addActionListener( new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    if(activeLabel != null && activeLabel.getText().length() != 3){//check for valid field
-                        activeLabel.setText(text);
+                    if(activeLabel == null){
+                        return;
+                    }
+                    int activeColor = activeLabel.getBackground().getBlue();
+                    String activeText = activeLabel.getText();
+                    if(activeColor == 148){//check for valid field
+                        activeLabel.setText(buttonText);
+                    }
+                    /*Now check labels in same box*/
+                    /*First find correct box*/
+                    JLabel[] searchBox = null;
+                    loop:
+                    for( JLabel[] box : isMoveCorrect[0] ){
+                        System.out.println(box.length);
+                        for( JLabel temp : box){
+                            if(temp == activeLabel){
+                                searchBox = box;
+                                break loop;
+                            }
+                        }
+                    }
+                    /*Now check for same number in a field*/
+                    for(JLabel temp : searchBox){
+                        int tempColor = temp.getBackground().getBlue();
+                        if(temp != activeLabel && temp.getText() == activeText){
+                            if(tempColor == 147 || tempColor == 230){
+                                temp.setBackground(new Color(255,0,0));
+                            }
+                            else if(tempColor == 148 || tempColor == 255){
+                                temp.setBackground(new Color(255,0,1));
+                            }
+                        }
                     }
                 }
             });
