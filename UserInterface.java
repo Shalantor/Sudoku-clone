@@ -120,6 +120,32 @@ public class UserInterface{
             j++;
         }
 
+        /*Add ActionListener*/
+        for(JLabel label : gameGrid){
+            label.addMouseListener(new MouseListener(){
+                public void mouseClicked(MouseEvent e){
+                    label.setBackground(new Color(240,240,148));
+                    if(activeLabel != null ){
+                        if(activeLabel.getText().length() > 1){              //Color of label is gray
+                            activeLabel.setBackground(new Color(230,230,230));
+                        }
+                        else{
+                            activeLabel.setBackground(new Color(255,255,255));  //Color is white
+                        }
+                    }
+                    activeLabel = label;
+                }
+                public void mouseEntered(MouseEvent e){
+                }
+                public void mouseReleased(MouseEvent e){
+                }
+                public void mousePressed(MouseEvent e){
+                }
+                public void mouseExited(MouseEvent e){
+                }
+            });
+        }
+
         center.validate();
 
         /*Creating label at bottom, which will be used fot the buttons*/
