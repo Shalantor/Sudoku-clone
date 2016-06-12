@@ -128,9 +128,15 @@ public class UserInterface{
                     if(activeLabel == label){           //check if this is the activeLabel
                         return;
                     }
-                    label.setBackground(new Color(240,240,148));
+                    Color labelColor = label.getBackground();
+                    if(labelColor.getBlue() == 230){
+                        label.setBackground(new Color(240,240,147));
+                    }
+                    else{
+                        label.setBackground(new Color(240,240,148));
+                    }
                     if(activeLabel != null ){
-                        if(activeLabel.getText().length() > 1){              //Color of label is gray
+                        if(activeLabel.getBackground().getBlue() == 147){       //Color of label is gray
                             activeLabel.setBackground(new Color(230,230,230));
                         }
                         else{
@@ -242,7 +248,7 @@ public class UserInterface{
 
             for(int i = 0; i < line.length(); i++){
                 if( line.charAt(i) != '.'){
-                    gameGrid[position].setText(" " + line.charAt(i) + " ");  //6 spaces
+                    gameGrid[position].setText("" + line.charAt(i));  //6 spaces
                     gameGrid[position].setBackground(new Color(230,230,230));
                 }
                 column ++ ;
