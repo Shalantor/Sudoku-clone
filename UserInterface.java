@@ -16,6 +16,7 @@ public class UserInterface{
     private JLabel activeLabel = null;
     private String linkData;
     private JButton[] buttons;
+    private ArrayList<JLabel> sameColors = new ArrayList<JLabel>();
 
     public UserInterface(int width,int height){
 
@@ -128,8 +129,7 @@ public class UserInterface{
                     if(activeLabel == label){           //check if this is the activeLabel
                         return;
                     }
-                    Color labelColor = label.getBackground();
-                    if(labelColor.getBlue() == 230){
+                    if(label.getBackground().getBlue() == 230){
                         label.setBackground(new Color(240,240,147));
                     }
                     else{
@@ -144,7 +144,38 @@ public class UserInterface{
                         }
                     }
                     activeLabel = label;
+                    /*Now check for same color labels*/
+                    if(!sameColors.isEmpty()){
+                        if(activeLabel.getText().charAt(0) != sameColors.get(0).getText().charAt(0)){
+                            for(JLabel temp : sameColors){                      //restore colors
+                                if(temp.getBackground().getBlue() == 147){       //Color of label is gray
+                                    temp.setBackground(new Color(230,230,230));
+                                }
+                                else{
+                                    temp.setBackground(new Color(255,255,255));  //Color is white
+                                }
+                            }
+                            sameColors.clear();                                 //clear list
+                        }
+                    }
+                    char activeChar = activeLabel.getText().charAt(0);
+                    if(activeChar == ' '){
+                        return;
+                    }
+                    for(JLabel temp: gameGrid){              //update colors of other labels with same content
+                        if(temp.getText().charAt(0) == activeChar){
+                            if(temp.getBackground().getBlue() == 230){       //Color of label is gray
+                                temp.setBackground(new Color(240,240,147));
+                                sameColors.add(temp);
+                            }
+                            else if (temp.getBackground().getBlue() == 255){
+                                temp.setBackground(new Color(240,240,148));  //Color is white
+                                sameColors.add(temp);
+                            }
+                        }
+                    }
                 }
+
                 public void mouseEntered(MouseEvent e){
                 }
                 public void mouseReleased(MouseEvent e){
@@ -250,6 +281,9 @@ public class UserInterface{
                 if( line.charAt(i) != '.'){
                     gameGrid[position].setText("" + line.charAt(i));  //6 spaces
                     gameGrid[position].setBackground(new Color(230,230,230));
+                }
+                else{
+                    gameGrid[position].setText(" ");
                 }
                 column ++ ;
                 if(column == 3){                        //we will get to next big grid on the right side
