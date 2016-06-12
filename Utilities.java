@@ -45,17 +45,19 @@ public class Utilities{
     }
 
     /*Creates the buttons available for playing for the user*/
-    public static void createPlayButtons(JLabel label){
+    public static JButton[] createPlayButtons(JLabel label){
 
         JButton tempButton;
         ImageIcon tempImage;
         JCheckBox tempCheckBox;
+        JButton[] buttons = new JButton[12];
 
         /*First add the buttons with the numbers*/
         for(int i=0; i < GRID; i++){
             tempButton = new JButton("" + (i+1));
             tempButton.setPreferredSize(new Dimension(70,40));
             label.add(tempButton);
+            buttons[i] = tempButton;
         }
 
         /*Then add rubber button*/
@@ -64,6 +66,7 @@ public class Utilities{
         tempButton = new JButton(tempImage);
         tempButton.setPreferredSize(new Dimension(70,40));
         label.add(tempButton);
+        buttons[9] = tempButton;
 
         /*Then add undo button*/
         tempImage = new ImageIcon("images/undo.png");
@@ -71,6 +74,7 @@ public class Utilities{
         tempButton = new JButton(tempImage);
         tempButton.setPreferredSize(new Dimension(70,40));
         label.add(tempButton);
+        buttons[10] = tempButton;
 
         /*Add checkbox for solution verification*/
         tempCheckBox = new JCheckBox("    Verify against Solution");
@@ -83,9 +87,12 @@ public class Utilities{
         tempButton = new JButton(tempImage);
         tempButton.setPreferredSize(new Dimension(70,40));
         label.add(tempButton);
+        buttons[11] = tempButton;
 
         /*Update scren*/
         label.validate();
+
+        return buttons;
 
 
     }
