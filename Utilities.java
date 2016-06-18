@@ -130,7 +130,7 @@ public class Utilities{
 
         /*First create 2darray based on squares*/
         for(; iterator < board.length; iterator++){
-            System.out.println("ROW " + row + "COLUMN " + column);
+            //System.out.println("ROW " + row + "COLUMN " + column);
             checkSameBox[row][column] = board[iterator];
             column++;
             if( column == 9){

@@ -213,7 +213,6 @@ public class UserInterface{
                         return;
                     }
                     int activeColor = activeLabel.getBackground().getBlue();
-                    String activeText = activeLabel.getText();
                     if(activeColor == 148){//check for valid field
                         activeLabel.setText(buttonText);
                     }
@@ -222,24 +221,21 @@ public class UserInterface{
                     JLabel[] searchBox = null;
                     loop:
                     for( JLabel[] box : isMoveCorrect[0] ){
-                        System.out.println(box.length);
                         for( JLabel temp : box){
-                            //System.out.println(box.length);
-                            System.out.println(temp);
-                            /*if(Utilities.isSameLabel(temp,activeLabel)){        //found label?
+                            if(temp == activeLabel){
                                 searchBox = box;
                                 break loop;
-                            }*/
+                            }
                         }
                     }
                     /*Now check for same number in a field*/
                     for(JLabel temp : searchBox){
                         int tempColor = temp.getBackground().getBlue();
-                        if(temp != activeLabel && temp.getText() == activeText){
-                            if(tempColor == 147 || tempColor == 230){
+                        if(temp.getText().equals(buttonText)){
+                            if(tempColor == 147 || tempColor == 230){           //No change allowed in field number
                                 temp.setBackground(new Color(255,0,0));
                             }
-                            else if(tempColor == 148 || tempColor == 255){
+                            else if(tempColor == 148 || tempColor == 255){      //Change allowed in field number
                                 temp.setBackground(new Color(255,0,1));
                             }
                         }
