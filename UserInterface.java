@@ -18,6 +18,7 @@ public class UserInterface{
     private JButton[] buttons;
     private ArrayList<JLabel> sameColors = new ArrayList<JLabel>();//Use for marking labels with same content when selecting
     private ArrayList<JLabel> redColor = new ArrayList<JLabel>();//use when input is not valid for that field
+    private ArrayList<UndoEntry> history = new ArrayList<UndoEntry>();//use for history when undoing actions
 
     public UserInterface(int width,int height){
 
