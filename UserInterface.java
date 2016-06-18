@@ -130,6 +130,15 @@ public class UserInterface{
                     if(activeLabel == label){           //check if this is the activeLabel
                         return;
                     }
+                    for(JLabel red : redColor){
+                        if(red.getBackground().getBlue() == 0){
+                            red.setBackground(new Color(230,230,230));
+                        }
+                        else{
+                            red.setBackground(new Color(255,255,255));
+                        }
+                    }
+                    redColor.clear();                   //empty list
                     if(label.getBackground().getBlue() == 230){
                         label.setBackground(new Color(240,240,147));
                     }
@@ -140,7 +149,7 @@ public class UserInterface{
                         if(activeLabel.getBackground().getBlue() == 147){       //Color of label is gray
                             activeLabel.setBackground(new Color(230,230,230));
                         }
-                        else{
+                        else if(activeLabel.getBackground().getBlue() == 148){
                             activeLabel.setBackground(new Color(255,255,255));  //Color is white
                         }
                     }
@@ -152,7 +161,7 @@ public class UserInterface{
                                 if(temp.getBackground().getBlue() == 147){       //Color of label is gray
                                     temp.setBackground(new Color(230,230,230));
                                 }
-                                else{
+                                else if(activeLabel.getBackground().getBlue() == 148){
                                     temp.setBackground(new Color(255,255,255));  //Color is white
                                 }
                             }
@@ -231,13 +240,14 @@ public class UserInterface{
                     /*Now check for same number in a field*/
                     for(JLabel temp : searchBox){
                         int tempColor = temp.getBackground().getBlue();
-                        if(temp.getText().equals(buttonText)){
+                        if( temp!=activeLabel && temp.getText().equals(buttonText)){
                             if(tempColor == 147 || tempColor == 230){           //No change allowed in field number
                                 temp.setBackground(new Color(255,0,0));
                             }
                             else if(tempColor == 148 || tempColor == 255){      //Change allowed in field number
                                 temp.setBackground(new Color(255,0,1));
                             }
+                            redColor.add(temp);
                         }
                     }
                 }
