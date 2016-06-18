@@ -213,7 +213,7 @@ public class UserInterface{
         buttons = Utilities.createPlayButtons(bottomLabel);
         bottomLabel.setVisible(true);
 
-        /*Add actionlisteners to buttons*/
+        /*Add actionlisteners to number buttons*/
         for(int i = 0; i < 9; i++){
             String buttonText = buttons[i].getText();
             buttons[i].addActionListener( new ActionListener(){
@@ -294,6 +294,30 @@ public class UserInterface{
                 }
             });
         }
+
+        /*Add actionlisteners to other buttons*/
+        buttons[9].addActionListener( new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+                if(activeLabel == null){
+                    return;
+                }
+                int activeColor = activeLabel.getBackground().getBlue();
+                if(activeColor == 255 || activeColor == 148 || activeColor == 0 || activeColor == 1){
+                    activeLabel.setText(" ");
+                    for(JLabel red : redColor){
+                        if(red.getBackground().getBlue() == 0){
+                            red.setBackground(new Color(230,230,230));
+                        }
+                        else if(red.getBackground().getBlue() == 1){
+                            red.setBackground(new Color(255,255,255));
+                        }
+                    }
+                    redColor.clear();
+                }
+            }
+
+        });
 
         /*Adjust window size*/
         sudoku.pack();
