@@ -250,6 +250,47 @@ public class UserInterface{
                             redColor.add(temp);
                         }
                     }
+                    /*Now check for same row or column*/
+                    /*Find row of label*/
+                    JLabel[] search = null;
+                    int searchIndex = 0;
+                    loop:
+                    for( JLabel[] row : isMoveCorrect[1]){
+                        for( JLabel temp : row){
+                            if ( temp == activeLabel){
+                                search = row;
+                                searchIndex = Arrays.asList(row).indexOf(temp);
+                                break loop;
+                            }
+                        }
+                    }
+                    /*Now find same in row*/
+                    for(JLabel temp : search){
+                        int tempColor = temp.getBackground().getBlue();
+                        if( temp!= activeLabel && temp.getText().equals(buttonText)){
+                            if(tempColor == 147 || tempColor == 230){           //No change allowed in field number
+                                temp.setBackground(new Color(255,0,0));
+                            }
+                            else if(tempColor == 148 || tempColor == 255){      //Change allowed in field number
+                                temp.setBackground(new Color(255,0,1));
+                            }
+                            redColor.add(temp);
+                        }
+                    }
+                    /*Now same column*/
+                    for(int i=0; i < 9; i++){
+                        JLabel temp = isMoveCorrect[1][i][searchIndex];
+                        int tempColor = temp.getBackground().getBlue();
+                        if( temp!= activeLabel && temp.getText().equals(buttonText)){
+                            if(tempColor == 147 || tempColor == 230){           //No change allowed in field number
+                                temp.setBackground(new Color(255,0,0));
+                            }
+                            else if(tempColor == 148 || tempColor == 255){      //Change allowed in field number
+                                temp.setBackground(new Color(255,0,1));
+                            }
+                            redColor.add(temp);
+                        }
+                    }
                 }
             });
         }
