@@ -123,7 +123,7 @@ public class UserInterface{
             j++;
         }
 
-        /*Add ActionListener*/
+        /*Add ActionListener to labels*/
         for(JLabel label : gameGrid){
             label.addMouseListener(new MouseListener(){
                 public void mouseClicked(MouseEvent e){
@@ -224,10 +224,12 @@ public class UserInterface{
                     for( JLabel[] box : isMoveCorrect[0] ){
                         System.out.println(box.length);
                         for( JLabel temp : box){
-                            if(temp == activeLabel){
+                            //System.out.println(box.length);
+                            System.out.println(temp);
+                            /*if(Utilities.isSameLabel(temp,activeLabel)){        //found label?
                                 searchBox = box;
                                 break loop;
-                            }
+                            }*/
                         }
                     }
                     /*Now check for same number in a field*/

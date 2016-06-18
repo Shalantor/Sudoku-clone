@@ -130,11 +130,11 @@ public class Utilities{
 
         /*First create 2darray based on squares*/
         for(; iterator < board.length; iterator++){
+            System.out.println("ROW " + row + "COLUMN " + column);
             checkSameBox[row][column] = board[iterator];
-            int newRow = iterator % 9;
             column++;
-            if( newRow != row){
-                row = newRow;
+            if( column == 9){
+                row++;
                 column = 0;
             }
         }
@@ -149,7 +149,7 @@ public class Utilities{
         int times = 3;
 
         while(true){
-            //TODO: Remove when finishedSystem.out.println("BOX: " + box + " BOXROW: " + boxRow);
+            //System.out.println("BOX: " + box + " BOXROW: " + boxRow);
             checkSameRowOrColumn[row][column] = checkSameBox[box][boxRow];
             /*Update positions of first array*/
             column++;
@@ -185,5 +185,10 @@ public class Utilities{
         }
         JLabel[][][] returnArray = {checkSameBox, checkSameRowOrColumn};
         return returnArray;
+    }
+
+    /*Check if same label*/
+    public static boolean isSameLabel(JLabel one, JLabel two){
+        return one.getX() == two.getX() && one.getY() == two.getY();
     }
 }
