@@ -1,15 +1,17 @@
+import javax.swing.*;
+
 public class UndoEntry{
 
-    private int position;
+    private JLabel label;
     private String text;
 
-    public UndoEntry(int position, String text){
-        this.position = position;
+    public UndoEntry(JLabel label, String text){
+        this.label = label;
         this.text = text;
     }
 
-    public int getInt(){
-        return position;
+    public JLabel getLabel(){
+        return label;
     }
 
     public String getText(){

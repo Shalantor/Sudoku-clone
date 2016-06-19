@@ -16,6 +16,7 @@ public class UserInterface{
     private JLabel activeLabel = null;
     private String linkData;
     private JButton[] buttons;
+    public static final int HISTORYSIZE = 20;
     private ArrayList<JLabel> sameColors = new ArrayList<JLabel>();//Use for marking labels with same content when selecting
     private ArrayList<JLabel> redColor = new ArrayList<JLabel>();//use when input is not valid for that field
     private ArrayList<UndoEntry> history = new ArrayList<UndoEntry>();//use for history when undoing actions
@@ -135,7 +136,7 @@ public class UserInterface{
                         if(red.getBackground().getBlue() == 0){
                             red.setBackground(new Color(230,230,230));
                         }
-                        else{
+                        else if(red.getBackground().getBlue() == 1){
                             red.setBackground(new Color(255,255,255));
                         }
                     }
@@ -224,6 +225,11 @@ public class UserInterface{
                     }
                     int activeColor = activeLabel.getBackground().getBlue();
                     if(activeColor == 148){//check for valid field
+                        UndoEntry entry = new UndoEntry(activeLabel,activeLabel.getText());
+                        history.add(entry);
+                        if( history.size() > HISTORYSIZE){  //if too large remove first
+                            history.remove(0);
+                        }
                         activeLabel.setText(buttonText);
                     }
                     /*Now check labels in same box*/
@@ -297,6 +303,7 @@ public class UserInterface{
         }
 
         /*Add actionlisteners to other buttons*/
+        /*Erase button*/
         buttons[9].addActionListener( new ActionListener(){
 
             public void actionPerformed(ActionEvent e){
@@ -318,6 +325,30 @@ public class UserInterface{
                 }
             }
 
+        });
+
+        /*Undo button*/
+        buttons[10].addActionListener( new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+                if(history.isEmpty()){
+                    return;
+                }
+                for(JLabel red : redColor){
+                    if(red.getBackground().getBlue() == 0){
+                        red.setBackground(new Color(230,230,230));
+                    }
+                    else if(red.getBackground().getBlue() == 1){
+                        red.setBackground(new Color(255,255,255));
+                    }
+                }
+                redColor.clear();
+                UndoEntry entry = history.get(history.size() - 1);
+                String text = entry.getText();
+                JLabel label = entry.getLabel();
+                label.setText(text);
+                history.remove(entry);
+            }
         });
 
         /*Adjust window size*/
