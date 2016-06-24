@@ -134,26 +134,13 @@ public class UserInterface{
                     if(activeLabel == label){           //check if this is the activeLabel
                         return;
                     }
-                    for(Field red : redColor){
-                        if(red.getBackground().getBlue() == 0){
-                            red.setBackground(new Color(230,230,230));
-                        }
-                        else if(red.getBackground().getBlue() == 1){
-                            red.setBackground(new Color(255,255,255));
-                        }
-                    }
-                    redColor.clear();                   //empty list
-                    if(label.getBackground().getBlue() == 230){
-                        label.setBackground(new Color(240,240,147));
-                    }
-                    else{
-                        label.setBackground(new Color(240,240,148));
-                    }
+                    clearRed();
+                    label.setBackground(new Color(240,240,148));
                     if(activeLabel != null ){
-                        if(activeLabel.getBackground().getBlue() == 147){       //Color of label is gray
+                        if(activeLabel.isPreset){       //Color of label is gray
                             activeLabel.setBackground(new Color(230,230,230));
                         }
-                        else if(activeLabel.getBackground().getBlue() == 148){
+                        else if(!activeLabel.isPreset){
                             activeLabel.setBackground(new Color(255,255,255));  //Color is white
                         }
                     }
@@ -162,10 +149,10 @@ public class UserInterface{
                     if(!sameColors.isEmpty()){
                         if(activeLabel.getText().charAt(0) != sameColors.get(0).getText().charAt(0)){
                             for(Field temp : sameColors){                      //restore colors
-                                if(temp.getBackground().getBlue() == 147){       //Color of label is gray
+                                if(temp.isPreset){       //Color of label is gray
                                     temp.setBackground(new Color(230,230,230));
                                 }
-                                else if(activeLabel.getBackground().getBlue() == 148){
+                                else if(!temp.isPreset){
                                     temp.setBackground(new Color(255,255,255));  //Color is white
                                 }
                             }
@@ -178,14 +165,8 @@ public class UserInterface{
                     }
                     for(Field temp: gameGrid){              //update colors of other labels with same content
                         if(temp.getText().charAt(0) == activeChar){
-                            if(temp.getBackground().getBlue() == 230){       //Color of label is gray
-                                temp.setBackground(new Color(240,240,147));
-                                sameColors.add(temp);
-                            }
-                            else if (temp.getBackground().getBlue() == 255){
-                                temp.setBackground(new Color(240,240,148));  //Color is white
-                                sameColors.add(temp);
-                            }
+                            temp.setBackground(new Color(240,240,148));  //Color is white
+                            sameColors.add(temp);
                         }
                     }
                 }
@@ -400,13 +381,6 @@ public class UserInterface{
         sudoku.setVisible(true);
     }
 
-    /*class sameNumber extends AbstractAction{
-        public void sameNumber(JLabel label){
-
-            label.setBackground(Color.yellow);
-            label.setOpaque(true);
-        }*/
-
     public void setUpGame(String difficulty) throws IOException{
 
         /*Used to store numbers*/
@@ -463,10 +437,10 @@ public class UserInterface{
                 if( line.charAt(i) != '.'){
                     gameGrid[position].setText("" + line.charAt(i));  //6 spaces
                     gameGrid[position].setBackground(new Color(230,230,230));
+                    gameGrid[position].isPreset = true;
                 }
                 else{
-                    gameGrid[position].setText("");
-                    gameGrid[position].isPreset = true;
+                    gameGrid[position].setText(" ");
                 }
                 column ++ ;
                 if(column == 3){                        //we will get to next big grid on the right side
@@ -492,6 +466,19 @@ public class UserInterface{
         solver.run();
 
         isMoveCorrect = Utilities.createCheckArrays(gameGrid);
+    }
+
+    //clear red fields
+    private void clearRed(){
+        for(Field red : redColor){
+            if(red.getBackground().getBlue() == 0){
+                red.setBackground(new Color(230,230,230));
+            }
+            else if(red.getBackground().getBlue() == 1){
+                red.setBackground(new Color(255,255,255));
+            }
+        }
+        redColor.clear();                   //empty list
     }
 
 }
