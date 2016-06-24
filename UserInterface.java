@@ -330,7 +330,7 @@ public class UserInterface{
                 else{
                     if(!isVerify){
                         topLabel.setText("");
-                        solution = solver.solution;
+                        int[][] solution = solver.solution;
                         for(int i =0; i < 9; i++){
                             for( int j =0; j < 9; j++){
                                 Integer set = new Integer(solution[i][j]);
@@ -388,6 +388,8 @@ public class UserInterface{
             System.out.println("IOException when trying to open stream");
             System.exit(0);
         }
+
+        this.enableButtons();
 
         /*position = where to place character
         row = which row we are , so we can adjust position(THIS IS NOT THE OVERALL ROW!!!)
@@ -463,6 +465,20 @@ public class UserInterface{
             }
         }
         redColor.clear();                   //empty list
+    }
+
+    //enable buttons
+    private void enableButtons(){
+        for ( AbstractButton b : buttons){
+            b.setEnabled(true);
+        }
+    }
+
+    //disable buttons
+    private void disableButtons(){
+        for ( AbstractButton b : buttons){
+            b.setEnabled(false);
+        }
     }
 
 }

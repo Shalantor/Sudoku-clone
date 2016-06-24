@@ -56,6 +56,7 @@ public class Utilities{
         for(int i=0; i < GRID; i++){
             tempButton = new JButton("" + (i+1));
             tempButton.setPreferredSize(new Dimension(70,40));
+            tempButton.setEnabled(false);
             label.add(tempButton);
             buttons[i] = tempButton;
         }
@@ -65,6 +66,7 @@ public class Utilities{
         tempImage = getScaledImage(tempImage.getImage(),20,20);
         tempButton = new JButton(tempImage);
         tempButton.setPreferredSize(new Dimension(70,40));
+        tempButton.setEnabled(false);
         label.add(tempButton);
         buttons[9] = tempButton;
 
@@ -73,12 +75,14 @@ public class Utilities{
         tempImage = getScaledImage(tempImage.getImage(),20,20);
         tempButton = new JButton(tempImage);
         tempButton.setPreferredSize(new Dimension(70,40));
+        tempButton.setEnabled(false);
         label.add(tempButton);
         buttons[10] = tempButton;
 
         /*Add checkbox for solution verification*/
         tempCheckBox = new JCheckBox("    Verify against Solution");
         tempCheckBox.setPreferredSize(new Dimension(295,40));
+        tempCheckBox.setEnabled(false);
         label.add(tempCheckBox);
         buttons[12] = tempCheckBox;
 
@@ -86,6 +90,7 @@ public class Utilities{
         tempImage = new ImageIcon("images/solve.png");
         tempImage = getScaledImage(tempImage.getImage(),20,20);
         tempButton = new JButton(tempImage);
+        tempButton.setEnabled(false);
         tempButton.setPreferredSize(new Dimension(70,40));
         label.add(tempButton);
         buttons[11] = tempButton;
