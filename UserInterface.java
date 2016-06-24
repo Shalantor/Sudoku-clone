@@ -150,7 +150,10 @@ public class UserInterface{
                     if(!sameColors.isEmpty()){
                         if(activeLabel.getText().charAt(0) != sameColors.get(0).getText().charAt(0)){
                             for(Field temp : sameColors){                      //restore colors
-                                if(temp.isPreset){       //Color of label is gray
+                                if(temp.verify){
+                                    temp.setBackground(new Color(0,128,255));
+                                }
+                                else if(temp.isPreset){       //Color of label is gray
                                     temp.setBackground(new Color(230,230,230));
                                 }
                                 else if(!temp.isPreset){
@@ -317,6 +320,7 @@ public class UserInterface{
                         }
                     }
                 }
+                disableButtons();
             }
         });
 
@@ -337,6 +341,7 @@ public class UserInterface{
                                 String text = isMoveCorrect[1][i][j].getText();
                                 if(text.equals(set.toString())){
                                     isMoveCorrect[1][i][j].setBackground(new Color (0,128,255));
+                                    isMoveCorrect[1][i][j].verify = true;
                                 }
                             }
                         }
@@ -345,6 +350,7 @@ public class UserInterface{
                     else{
                         for(int i =0; i < 9; i++){
                             for( int j =0; j < 9; j++){
+                                isMoveCorrect[1][i][j].verify = false;
                                 if(isMoveCorrect[1][i][j].isPreset){
                                     isMoveCorrect[1][i][j].setBackground(new Color (230,230,230));
                                 }
