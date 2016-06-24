@@ -16,7 +16,7 @@ public class UserInterface{
     private static final int GRID = 9;
     private JLabel activeLabel = null;
     private String linkData;
-    private JButton[] buttons;
+    private AbstractButton[] buttons = new AbstractButton[13];
     public static final int HISTORYSIZE = 20;
     private ArrayList<JLabel> sameColors = new ArrayList<JLabel>();//Use for marking labels with same content when selecting
     private ArrayList<JLabel> redColor = new ArrayList<JLabel>();//use when input is not valid for that field

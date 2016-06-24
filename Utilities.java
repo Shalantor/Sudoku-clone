@@ -45,12 +45,12 @@ public class Utilities{
     }
 
     /*Creates the buttons available for playing for the user*/
-    public static JButton[] createPlayButtons(JLabel label){
+    public static AbstractButton[] createPlayButtons(JLabel label){
 
         JButton tempButton;
         ImageIcon tempImage;
         JCheckBox tempCheckBox;
-        JButton[] buttons = new JButton[12];
+        AbstractButton[] buttons = new AbstractButton[13];
 
         /*First add the buttons with the numbers*/
         for(int i=0; i < GRID; i++){
@@ -80,6 +80,7 @@ public class Utilities{
         tempCheckBox = new JCheckBox("    Verify against Solution");
         tempCheckBox.setPreferredSize(new Dimension(295,40));
         label.add(tempCheckBox);
+        buttons[12] = tempCheckBox;
 
         /*Add button to show solution*/
         tempImage = new ImageIcon("images/solve.png");
