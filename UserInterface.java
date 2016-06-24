@@ -373,6 +373,27 @@ public class UserInterface{
             }
         });
 
+        buttons[12].addActionListener( new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+                if(!solver.finished){
+                    topLabel.setText("Solution not ready yet.");
+                }
+                else{
+                    topLabel.setText("");
+                    int[][] solution = solver.solution;
+                    for(int i =0; i < 9; i++){
+                        for( int j =0; j < 9; j++){
+                            Integer set = new Integer(solution[i][j]);
+                            if(isMoveCorrect[0][i][j].getText().equals(set.toString())){
+                                isMoveCorrect[0][i][j].setBackground(new Color (0,128,255));
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
         /*Adjust window size*/
         sudoku.pack();
 
