@@ -3,6 +3,7 @@ import java.awt.*;
 import javax.swing.border.*;
 import java.util.*;
 import java.awt.event.*;
+import java.awt.image.*;
 import java.net.*;
 import java.io.*;
 
@@ -101,7 +102,7 @@ public class UserInterface{
         menu.setVisible(true);
 
         /*Creating empty label at top, which will be used for end winning message*/
-        JLabel topLabel = new JLabel();
+        JLabel topLabel = new JLabel("",SwingConstants.CENTER);
         sudoku.add(topLabel,BorderLayout.NORTH);
         topLabel.setPreferredSize(new Dimension(width,height/6));
         topLabel.setBackground(new Color(223,223,223));
@@ -352,6 +353,26 @@ public class UserInterface{
             }
         });
 
+        /*Solve button*/
+        buttons[11].addActionListener( new ActionListener(){
+
+            public void actionPerformed(ActionEvent e){
+                if(!solver.finished){
+                    topLabel.setText("Solution not ready yet.");
+                }
+                else{
+                    topLabel.setText("");
+                    int[][] solution = solver.solution;
+                    for(int i =0; i < 9; i++){
+                        for( int j =0; j < 9; j++){
+                            Integer set = new Integer(solution[i][j]);
+                            isMoveCorrect[0][i][j].setText(set.toString());
+                        }
+                    }
+                }
+            }
+        });
+
         /*Adjust window size*/
         sudoku.pack();
 
@@ -446,6 +467,7 @@ public class UserInterface{
         }
 
         solver = new SudokuSolver(parseToSolver);
+        solver.run();
 
         isMoveCorrect = Utilities.createCheckArrays(gameGrid);
     }

@@ -1,8 +1,9 @@
 import java.util.*;
 
-public class SudokuSolver{
+public class SudokuSolver extends Thread{
 
-    private int[][] solution = new int[9][9];
+    public int[][] solution = new int[9][9];
+    public boolean finished = false;
 
     public SudokuSolver(String toSolve){
         int x = 0;
@@ -16,13 +17,12 @@ public class SudokuSolver{
                 x++;
             }
         }
+    }
+
+    @Override
+    public void run(){
         this.solve(0,0,solution);
-        for(int i =0; i < 9; i++ ){
-            for(int j =0; j < 9; j++){
-                System.out.print(solution[i][j]);
-            }
-            System.out.println("");
-        }
+        finished = true;
     }
 
     public boolean solve(int x,int y,int matrix[][]){
