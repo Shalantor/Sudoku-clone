@@ -20,6 +20,7 @@ public class UserInterface{
     private ArrayList<JLabel> sameColors = new ArrayList<JLabel>();//Use for marking labels with same content when selecting
     private ArrayList<JLabel> redColor = new ArrayList<JLabel>();//use when input is not valid for that field
     private ArrayList<UndoEntry> history = new ArrayList<UndoEntry>();//use for history when undoing actions
+    private SudokuSolver solver;
 
     public UserInterface(int width,int height){
 
@@ -400,7 +401,10 @@ public class UserInterface{
         int row = 0;
         int column = 0;
         int adjRow = 0;
+        String parseToSolver = "";
         while( (line = in.readLine() ) != null){
+
+            parseToSolver += line;
 
             if(row < 3){                            //still in same grid
                 position =  row * 3 + adjRow;       //instantiate position(far left side)
@@ -440,6 +444,8 @@ public class UserInterface{
             System.out.println("IOException when closing stream");
             System.exit(0);
         }
+
+        solver = new SudokuSolver(parseToSolver);
 
         isMoveCorrect = Utilities.createCheckArrays(gameGrid);
     }
