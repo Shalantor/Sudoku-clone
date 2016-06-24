@@ -22,6 +22,7 @@ public class UserInterface{
     private ArrayList<Field> redColor = new ArrayList<Field>();//use when input is not valid for that field
     private ArrayList<UndoEntry> history = new ArrayList<UndoEntry>();//use for history when undoing actions
     private SudokuSolver solver;
+    private boolean isVerify = false;
 
     public UserInterface(int width,int height){
 
@@ -228,7 +229,7 @@ public class UserInterface{
                     for(Field temp : searchBox){
                         int tempColor = temp.getBackground().getBlue();
                         if( temp!=activeLabel && temp.getText().equals(buttonText)){
-                            temp.setBackground(new Color(255,0,0));
+                            temp.setBackground(new Color(255,16,0));
                             redColor.add(temp);
                         }
                     }
@@ -250,7 +251,7 @@ public class UserInterface{
                     for(Field temp : search){
                         int tempColor = temp.getBackground().getBlue();
                         if( temp!= activeLabel && temp.getText().equals(buttonText)){
-                            temp.setBackground(new Color(255,0,0));
+                            temp.setBackground(new Color(255,16,0));
                             redColor.add(temp);
                         }
                     }
@@ -259,7 +260,7 @@ public class UserInterface{
                         Field temp = isMoveCorrect[1][i][searchIndex];
                         int tempColor = temp.getBackground().getBlue();
                         if( temp!= activeLabel && temp.getText().equals(buttonText)){
-                            temp.setBackground(new Color(255,0,0));
+                            temp.setBackground(new Color(255,16,0));
                             redColor.add(temp);
                         }
                     }
@@ -290,15 +291,7 @@ public class UserInterface{
                 if(history.isEmpty()){
                     return;
                 }
-                for(Field red : redColor){
-                    if(red.getBackground().getBlue() == 0){
-                        red.setBackground(new Color(230,230,230));
-                    }
-                    else if(red.getBackground().getBlue() == 1){
-                        red.setBackground(new Color(255,255,255));
-                    }
-                }
-                redColor.clear();
+                clearRed();
                 UndoEntry entry = history.get(history.size() - 1);
                 String text = entry.getText();
                 JLabel label = entry.getLabel();
@@ -327,6 +320,7 @@ public class UserInterface{
             }
         });
 
+        /*Verify against solution*/
         buttons[12].addActionListener( new ActionListener(){
 
             public void actionPerformed(ActionEvent e){
@@ -334,15 +328,31 @@ public class UserInterface{
                     topLabel.setText("Solution not ready yet.");
                 }
                 else{
-                    topLabel.setText("");
-                    int[][] solution = solver.solution;
-                    for(int i =0; i < 9; i++){
-                        for( int j =0; j < 9; j++){
-                            Integer set = new Integer(solution[i][j]);
-                            if(isMoveCorrect[0][i][j].getText().equals(set.toString())){
-                                isMoveCorrect[0][i][j].setBackground(new Color (0,128,255));
+                    if(!isVerify){
+                        topLabel.setText("");
+                        int[][] solution = solver.solution;
+                        for(int i =0; i < 9; i++){
+                            for( int j =0; j < 9; j++){
+                                Integer set = new Integer(solution[i][j]);
+                                if(isMoveCorrect[0][i][j].getText().equals(set.toString())){
+                                    isMoveCorrect[0][i][j].setBackground(new Color (0,128,255));
+                                }
                             }
                         }
+                        isVerify = true;
+                    }
+                    else{
+                        for(int i =0; i < 9; i++){
+                            for( int j =0; j < 9; j++){
+                                if(isMoveCorrect[0][i][j].isPreset){
+                                    isMoveCorrect[0][i][j].setBackground(new Color (230,230,230));
+                                }
+                                else{
+                                    isMoveCorrect[0][i][j].setBackground(new Color (255,255,255));
+                                }
+                            }
+                        }
+                        isVerify = false;
                     }
                 }
             }

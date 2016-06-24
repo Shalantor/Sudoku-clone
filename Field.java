@@ -9,6 +9,7 @@ import java.awt.image.*;
 public class Field extends JLabel{
 
     public boolean isPreset = false;
+    public boolean verify = false;
 
     public Field(String input){
         super(input,SwingConstants.CENTER);
