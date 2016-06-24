@@ -203,18 +203,15 @@ public class UserInterface{
             String buttonText = buttons[i].getText();
             buttons[i].addActionListener( new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    if(activeLabel == null){
+                    if(activeLabel == null || activeLabel.isPreset){
                         return;
                     }
-                    int activeColor = activeLabel.getBackground().getBlue();
-                    if(activeColor == 148){//check for valid field
-                        UndoEntry entry = new UndoEntry(activeLabel,activeLabel.getText());
-                        history.add(entry);
-                        if( history.size() > HISTORYSIZE){  //if too large remove first
-                            history.remove(0);
-                        }
-                        activeLabel.setText(buttonText);
+                    UndoEntry entry = new UndoEntry(activeLabel,activeLabel.getText());
+                    history.add(entry);
+                    if( history.size() > HISTORYSIZE){  //if too large remove first
+                        history.remove(0);
                     }
+                    activeLabel.setText(buttonText);
                     /*Now check labels in same box*/
                     /*First find correct box*/
                     Field[] searchBox = null;
@@ -231,12 +228,7 @@ public class UserInterface{
                     for(Field temp : searchBox){
                         int tempColor = temp.getBackground().getBlue();
                         if( temp!=activeLabel && temp.getText().equals(buttonText)){
-                            if(tempColor == 147 || tempColor == 230){           //No change allowed in field number
-                                temp.setBackground(new Color(255,0,0));
-                            }
-                            else if(tempColor == 148 || tempColor == 255){      //Change allowed in field number
-                                temp.setBackground(new Color(255,0,1));
-                            }
+                            temp.setBackground(new Color(255,0,0));
                             redColor.add(temp);
                         }
                     }
@@ -258,12 +250,7 @@ public class UserInterface{
                     for(Field temp : search){
                         int tempColor = temp.getBackground().getBlue();
                         if( temp!= activeLabel && temp.getText().equals(buttonText)){
-                            if(tempColor == 147 || tempColor == 230){           //No change allowed in field number
-                                temp.setBackground(new Color(255,0,0));
-                            }
-                            else if(tempColor == 148 || tempColor == 255){      //Change allowed in field number
-                                temp.setBackground(new Color(255,0,1));
-                            }
+                            temp.setBackground(new Color(255,0,0));
                             redColor.add(temp);
                         }
                     }
@@ -272,12 +259,7 @@ public class UserInterface{
                         Field temp = isMoveCorrect[1][i][searchIndex];
                         int tempColor = temp.getBackground().getBlue();
                         if( temp!= activeLabel && temp.getText().equals(buttonText)){
-                            if(tempColor == 147 || tempColor == 230){           //No change allowed in field number
-                                temp.setBackground(new Color(255,0,0));
-                            }
-                            else if(tempColor == 148 || tempColor == 255){      //Change allowed in field number
-                                temp.setBackground(new Color(255,0,1));
-                            }
+                            temp.setBackground(new Color(255,0,0));
                             redColor.add(temp);
                         }
                     }
@@ -293,18 +275,9 @@ public class UserInterface{
                 if(activeLabel == null){
                     return;
                 }
-                int activeColor = activeLabel.getBackground().getBlue();
-                if(activeColor == 255 || activeColor == 148 || activeColor == 0 || activeColor == 1){
+                if(!activeLabel.isPreset){
                     activeLabel.setText(" ");
-                    for(JLabel red : redColor){
-                        if(red.getBackground().getBlue() == 0){
-                            red.setBackground(new Color(230,230,230));
-                        }
-                        else if(red.getBackground().getBlue() == 1){
-                            red.setBackground(new Color(255,255,255));
-                        }
-                    }
-                    redColor.clear();
+                    clearRed();
                 }
             }
 
@@ -471,10 +444,10 @@ public class UserInterface{
     //clear red fields
     private void clearRed(){
         for(Field red : redColor){
-            if(red.getBackground().getBlue() == 0){
+            if(red.isPreset){
                 red.setBackground(new Color(230,230,230));
             }
-            else if(red.getBackground().getBlue() == 1){
+            else{
                 red.setBackground(new Color(255,255,255));
             }
         }
