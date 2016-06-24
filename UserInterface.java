@@ -330,12 +330,13 @@ public class UserInterface{
                 else{
                     if(!isVerify){
                         topLabel.setText("");
-                        int[][] solution = solver.solution;
+                        solution = solver.solution;
                         for(int i =0; i < 9; i++){
                             for( int j =0; j < 9; j++){
                                 Integer set = new Integer(solution[i][j]);
-                                if(isMoveCorrect[0][i][j].getText().equals(set.toString())){
-                                    isMoveCorrect[0][i][j].setBackground(new Color (0,128,255));
+                                String text = isMoveCorrect[1][i][j].getText();
+                                if(text.equals(set.toString())){
+                                    isMoveCorrect[1][i][j].setBackground(new Color (0,128,255));
                                 }
                             }
                         }
@@ -344,11 +345,11 @@ public class UserInterface{
                     else{
                         for(int i =0; i < 9; i++){
                             for( int j =0; j < 9; j++){
-                                if(isMoveCorrect[0][i][j].isPreset){
-                                    isMoveCorrect[0][i][j].setBackground(new Color (230,230,230));
+                                if(isMoveCorrect[1][i][j].isPreset){
+                                    isMoveCorrect[1][i][j].setBackground(new Color (230,230,230));
                                 }
                                 else{
-                                    isMoveCorrect[0][i][j].setBackground(new Color (255,255,255));
+                                    isMoveCorrect[1][i][j].setBackground(new Color (255,255,255));
                                 }
                             }
                         }
