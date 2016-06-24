@@ -11,15 +11,15 @@ public class UserInterface{
 
     /*TODO:remove tempGameGrid*/
     public JLabel[] tempGameGrid;
-    private JLabel[][][] isMoveCorrect ;        //First 2d array is for same box, second is for row and columns
-    public JLabel[] gameGrid= new JLabel[81];
+    private Field[][][] isMoveCorrect ;        //First 2d array is for same box, second is for row and columns
+    public Field[] gameGrid= new Field[81];
     private static final int GRID = 9;
-    private JLabel activeLabel = null;
+    private Field activeLabel = null;
     private String linkData;
     private AbstractButton[] buttons = new AbstractButton[13];
     public static final int HISTORYSIZE = 20;
-    private ArrayList<JLabel> sameColors = new ArrayList<JLabel>();//Use for marking labels with same content when selecting
-    private ArrayList<JLabel> redColor = new ArrayList<JLabel>();//use when input is not valid for that field
+    private ArrayList<Field> sameColors = new ArrayList<Field>();//Use for marking labels with same content when selecting
+    private ArrayList<Field> redColor = new ArrayList<Field>();//use when input is not valid for that field
     private ArrayList<UndoEntry> history = new ArrayList<UndoEntry>();//use for history when undoing actions
     private SudokuSolver solver;
 
@@ -128,13 +128,13 @@ public class UserInterface{
         }
 
         /*Add ActionListener to labels*/
-        for(JLabel label : gameGrid){
+        for(Field label : gameGrid){
             label.addMouseListener(new MouseListener(){
                 public void mouseClicked(MouseEvent e){
                     if(activeLabel == label){           //check if this is the activeLabel
                         return;
                     }
-                    for(JLabel red : redColor){
+                    for(Field red : redColor){
                         if(red.getBackground().getBlue() == 0){
                             red.setBackground(new Color(230,230,230));
                         }
@@ -161,7 +161,7 @@ public class UserInterface{
                     /*Now check for same color labels*/
                     if(!sameColors.isEmpty()){
                         if(activeLabel.getText().charAt(0) != sameColors.get(0).getText().charAt(0)){
-                            for(JLabel temp : sameColors){                      //restore colors
+                            for(Field temp : sameColors){                      //restore colors
                                 if(temp.getBackground().getBlue() == 147){       //Color of label is gray
                                     temp.setBackground(new Color(230,230,230));
                                 }
@@ -176,7 +176,7 @@ public class UserInterface{
                     if(activeChar == ' '){
                         return;
                     }
-                    for(JLabel temp: gameGrid){              //update colors of other labels with same content
+                    for(Field temp: gameGrid){              //update colors of other labels with same content
                         if(temp.getText().charAt(0) == activeChar){
                             if(temp.getBackground().getBlue() == 230){       //Color of label is gray
                                 temp.setBackground(new Color(240,240,147));
@@ -236,10 +236,10 @@ public class UserInterface{
                     }
                     /*Now check labels in same box*/
                     /*First find correct box*/
-                    JLabel[] searchBox = null;
+                    Field[] searchBox = null;
                     loop:
-                    for( JLabel[] box : isMoveCorrect[0] ){
-                        for( JLabel temp : box){
+                    for( Field[] box : isMoveCorrect[0] ){
+                        for( Field temp : box){
                             if(temp == activeLabel){
                                 searchBox = box;
                                 break loop;
@@ -247,7 +247,7 @@ public class UserInterface{
                         }
                     }
                     /*Now check for same number in a field*/
-                    for(JLabel temp : searchBox){
+                    for(Field temp : searchBox){
                         int tempColor = temp.getBackground().getBlue();
                         if( temp!=activeLabel && temp.getText().equals(buttonText)){
                             if(tempColor == 147 || tempColor == 230){           //No change allowed in field number
@@ -261,11 +261,11 @@ public class UserInterface{
                     }
                     /*Now check for same row or column*/
                     /*Find row of label*/
-                    JLabel[] search = null;
+                    Field[] search = null;
                     int searchIndex = 0;
                     loop:
-                    for( JLabel[] row : isMoveCorrect[1]){
-                        for( JLabel temp : row){
+                    for( Field[] row : isMoveCorrect[1]){
+                        for( Field temp : row){
                             if ( temp == activeLabel){
                                 search = row;
                                 searchIndex = Arrays.asList(row).indexOf(temp);
@@ -274,7 +274,7 @@ public class UserInterface{
                         }
                     }
                     /*Now find same in row*/
-                    for(JLabel temp : search){
+                    for(Field temp : search){
                         int tempColor = temp.getBackground().getBlue();
                         if( temp!= activeLabel && temp.getText().equals(buttonText)){
                             if(tempColor == 147 || tempColor == 230){           //No change allowed in field number
@@ -288,7 +288,7 @@ public class UserInterface{
                     }
                     /*Now same column*/
                     for(int i=0; i < 9; i++){
-                        JLabel temp = isMoveCorrect[1][i][searchIndex];
+                        Field temp = isMoveCorrect[1][i][searchIndex];
                         int tempColor = temp.getBackground().getBlue();
                         if( temp!= activeLabel && temp.getText().equals(buttonText)){
                             if(tempColor == 147 || tempColor == 230){           //No change allowed in field number
@@ -336,7 +336,7 @@ public class UserInterface{
                 if(history.isEmpty()){
                     return;
                 }
-                for(JLabel red : redColor){
+                for(Field red : redColor){
                     if(red.getBackground().getBlue() == 0){
                         red.setBackground(new Color(230,230,230));
                     }
@@ -465,7 +465,8 @@ public class UserInterface{
                     gameGrid[position].setBackground(new Color(230,230,230));
                 }
                 else{
-                    gameGrid[position].setText(" ");
+                    gameGrid[position].setText("");
+                    gameGrid[position].isPreset = true;
                 }
                 column ++ ;
                 if(column == 3){                        //we will get to next big grid on the right side

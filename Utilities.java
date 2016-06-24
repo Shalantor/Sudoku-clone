@@ -26,12 +26,12 @@ public class Utilities{
     }
 
     /*Creates the smaller grid for the actual game field*/
-    public static JLabel[] createSmallGrid(JLabel label,JLabel[] labelArray,int start){
+    public static Field[] createSmallGrid(JLabel label,Field[] labelArray,int start){
 
         label.setLayout(new GridLayout(3,3,2,2));
 
         for(int i=0; i < GRID ; i++){
-            labelArray[start + i] = new JLabel("",SwingConstants.CENTER);
+            labelArray[start + i] = new Field("");
             labelArray[start + i].setBorder(BorderFactory.createLineBorder(Color.cyan));
             labelArray[start + i].setBackground(new Color(255,255,255));
             labelArray[start + i].setOpaque(true);
@@ -114,20 +114,20 @@ public class Utilities{
     }
 
     /*Instantiate board before filling it*/
-    public static void emptyBoard(JLabel[] board){
+    public static void emptyBoard(Field[] board){
         /*Empty board*/
-        for(JLabel label : board){
+        for(Field label : board){
             label.setText("");
             label.setBackground(new Color(255,255,255));
         }
     }
 
     /*Create arrays for position checks on boards, like same row and column*/
-    public static JLabel[][][] createCheckArrays(JLabel[] board){
+    public static Field[][][] createCheckArrays(Field[] board){
 
         int row = 0,column = 0,iterator = 0;
-        JLabel[][] checkSameBox = new JLabel[9][9];
-        JLabel[][] checkSameRowOrColumn = new JLabel[9][9];
+        Field[][] checkSameBox = new Field[9][9];
+        Field[][] checkSameRowOrColumn = new Field[9][9];
 
         /*First create 2darray based on squares*/
         for(; iterator < board.length; iterator++){
@@ -184,12 +184,12 @@ public class Utilities{
                 box = row;
             }
         }
-        JLabel[][][] returnArray = {checkSameBox, checkSameRowOrColumn};
+        Field[][][] returnArray = {checkSameBox, checkSameRowOrColumn};
         return returnArray;
     }
 
     /*Check if same label*/
-    public static boolean isSameLabel(JLabel one, JLabel two){
+    public static boolean isSameLabel(Field one, Field two){
         return one.getX() == two.getX() && one.getY() == two.getY();
     }
 }
