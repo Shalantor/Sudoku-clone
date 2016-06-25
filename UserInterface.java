@@ -359,6 +359,10 @@ public class UserInterface{
                                 }
                             }
                         }
+                        activeLabel.setBackground(new Color(240,240,148));
+                        for(Field f : sameColors){
+                            f.setBackground(new Color(240,240,148));
+                        }
                         isVerify = false;
                     }
                 }

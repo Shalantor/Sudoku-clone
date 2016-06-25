@@ -138,6 +138,8 @@ public class Utilities{
         for(; iterator < board.length; iterator++){
             //System.out.println("ROW " + row + "COLUMN " + column);
             checkSameBox[row][column] = board[iterator];
+            board[iterator].xCoordinate = row;
+            board[iterator].yCoordinate = column;
             column++;
             if( column == 9){
                 row++;

@@ -10,6 +10,8 @@ public class Field extends JLabel{
 
     public boolean isPreset = false;
     public boolean verify = false;
+    public int xCoordinate;
+    public int yCoordinate;
 
     public Field(String input){
         super(input,SwingConstants.CENTER);
