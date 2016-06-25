@@ -272,9 +272,12 @@ public class UserInterface{
                     loop:
                     for(int i=0; i < 9; i++){
                         for(int j = 0; j < 9; j++){
-                            if(solution[i][j] != new Integer(isMoveCorrect[1][i][j].getText())){
-                                finished = false;
-                                break loop;
+                            String text = isMoveCorrect[1][i][j].getText();
+                            if(!text.equals(" ")){
+                                if(solution[i][j] != new Integer(text)){
+                                    finished = false;
+                                    break loop;
+                                }
                             }
                         }
                     }
