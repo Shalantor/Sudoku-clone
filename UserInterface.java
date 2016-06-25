@@ -23,6 +23,7 @@ public class UserInterface{
     private ArrayList<UndoEntry> history = new ArrayList<UndoEntry>();//use for history when undoing actions
     private SudokuSolver solver;
     private boolean isVerify = false;
+    private int[][] solution = new int[9][9];
 
     public UserInterface(int width,int height){
 
@@ -267,6 +268,22 @@ public class UserInterface{
                             redColor.add(temp);
                         }
                     }
+                    boolean finished = true;
+                    loop:
+                    for(int i=0; i < 9; i++){
+                        for(int j = 0; j < 9; j++){
+                            if(solution[i][j] != new Integer(isMoveCorrect[1][i][j].getText())){
+                                finished = false;
+                                break loop;
+                            }
+                        }
+                    }
+                    if(finished){
+                        topLabel.setText("Gongratulations!");
+                        for(AbstractButton b : buttons){
+                            b.setEnabled(false);
+                        }
+                    }
                 }
             });
         }
@@ -312,7 +329,7 @@ public class UserInterface{
                 }
                 else{
                     topLabel.setText("");
-                    int[][] solution = solver.solution;
+                    solution = solver.solution;
                     for(int i =0; i < 9; i++){
                         for( int j =0; j < 9; j++){
                             Integer set = new Integer(solution[i][j]);
@@ -334,7 +351,7 @@ public class UserInterface{
                 else{
                     if(!isVerify){
                         topLabel.setText("");
-                        int[][] solution = solver.solution;
+                        solution = solver.solution;
                         for(int i =0; i < 9; i++){
                             for( int j =0; j < 9; j++){
                                 Integer set = new Integer(solution[i][j]);
