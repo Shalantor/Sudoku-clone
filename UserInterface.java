@@ -18,10 +18,10 @@ public class UserInterface{
     private ArrayList<Field> sameColors = new ArrayList<Field>();               //Use for marking labels with same content when selecting
     private ArrayList<Field> redColor = new ArrayList<Field>();                 //use when input is not valid for that field
     private ArrayList<UndoEntry> history = new ArrayList<UndoEntry>();          //use for history when undoing actions
-    private ArrayList<Field> blueColors = new ArrayList<Field>();
+    private ArrayList<Field> blueColors = new ArrayList<Field>();               //use for verifying
     private SudokuSolver solver;
-    private boolean isVerify = false;
-    private int[][] solution = new int[9][9];
+    private boolean isVerify = false;                                           //verifying in progress
+    private int[][] solution = new int[9][9];                                   //solution from solver
 
     public UserInterface(int width,int height){
 
@@ -134,7 +134,7 @@ public class UserInterface{
                     if(activeLabel == label){           //check if this is the activeLabel
                         return;
                     }
-                    clearRed();
+                    clearRed();                         //clear red labels
                     label.setBackground(new Color(240,240,148));
                     if(activeLabel != null ){
                         if(activeLabel.isPreset){       //Color of label is gray
@@ -266,6 +266,7 @@ public class UserInterface{
                             redColor.add(temp);
                         }
                     }
+                    /*Check if user won*/
                     boolean finished = true;
                     loop:
                     for(int i=0; i < 9; i++){
@@ -349,7 +350,7 @@ public class UserInterface{
                 if(!solver.finished){
                     topLabel.setText("Solution not ready yet.");
                 }
-                else{
+                else{/*Are we currently verifying solution?*/
                     if(!isVerify){
                         topLabel.setText("");
                         solution = solver.solution;
@@ -366,7 +367,7 @@ public class UserInterface{
                         }
                         isVerify = true;
                     }
-                    else{
+                    else{/*If not , just restore the olors*/
                         for(Field b : blueColors){
                             b.verify = false;
                             if(b.isPreset){

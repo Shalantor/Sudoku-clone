@@ -3,7 +3,7 @@ import java.util.*;
 public class SudokuSolver extends Thread{
 
     public int[][] solution = new int[9][9];
-    public boolean finished = false;
+    public boolean finished = false;                //signal to thread waiting that solution is ready
 
     public SudokuSolver(String toSolve){
         int x = 0;
@@ -12,7 +12,7 @@ public class SudokuSolver extends Thread{
             if(toSolve.charAt(i) != '.'){   //check for valid entry in sudoku field
                 solution[x][y] = Integer.parseInt(toSolve.substring(i,i+1));
             }
-            if( ++y == 9){
+            if( ++y == 9){                  //out of bounds
                 y = 0;
                 x++;
             }
@@ -32,10 +32,10 @@ public class SudokuSolver extends Thread{
                 return true;
             }
         }
-        if( matrix[x][y] != 0){ //check for fields that are pre set
+        if( matrix[x][y] != 0){ //check for fields that are preset
             return solve(x+1,y,matrix);
         }
-        for( int num = 1; num <= 9; num++){
+        for( int num = 1; num <= 9; num++){             //solve recursively
             if(legalPosition(x,y,num,matrix)) {
                 matrix[x][y] = num;
                 if( solve(x+1,y,matrix) ){
@@ -58,7 +58,7 @@ public class SudokuSolver extends Thread{
                 return false;
             }
         }
-        int rowOffset = ( x / 3) * 3;
+        int rowOffset = ( x / 3) * 3;       //same box
         int columnOffset = ( y / 3) * 3;
         for( int i = 0; i < 3; i++){
             for (int j =0; j < 3; j++){

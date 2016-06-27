@@ -1,9 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
-import javax.swing.border.*;
-import java.util.*;
-import java.awt.event.*;
-import java.awt.image.*;
 
 /*Class for the individual fields in the gamegrid*/
 public class Field extends JLabel{
