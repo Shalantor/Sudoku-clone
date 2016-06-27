@@ -9,18 +9,16 @@ import java.io.*;
 
 public class UserInterface{
 
-    /*TODO:remove tempGameGrid*/
-    public JLabel[] tempGameGrid;
-    private Field[][][] isMoveCorrect ;        //First 2d array is for same box, second is for row and columns
-    public Field[] gameGrid= new Field[81];
-    private static final int GRID = 9;
-    private Field activeLabel = null;
-    private String linkData;
-    private AbstractButton[] buttons = new AbstractButton[13];
-    public static final int HISTORYSIZE = 20;
-    private ArrayList<Field> sameColors = new ArrayList<Field>();//Use for marking labels with same content when selecting
-    private ArrayList<Field> redColor = new ArrayList<Field>();//use when input is not valid for that field
-    private ArrayList<UndoEntry> history = new ArrayList<UndoEntry>();//use for history when undoing actions
+    private Field[][][] isMoveCorrect ;                                         //First 2d array is for same box, second is for row and columns
+    public Field[] gameGrid= new Field[81];                                     //all fields
+    private static final int GRID = 9;                                          //length of columns and rows
+    private Field activeLabel = null;                                           //currently active label
+    private AbstractButton[] buttons = new AbstractButton[13];                  //play buttons
+    public static final int HISTORYSIZE = 20;                                   //size of undo history
+    private ArrayList<Field> sameColors = new ArrayList<Field>();               //Use for marking labels with same content when selecting
+    private ArrayList<Field> redColor = new ArrayList<Field>();                 //use when input is not valid for that field
+    private ArrayList<UndoEntry> history = new ArrayList<UndoEntry>();          //use for history when undoing actions
+    private ArrayList<Field> blueColors = new ArrayList<Field>();
     private SudokuSolver solver;
     private boolean isVerify = false;
     private int[][] solution = new int[9][9];
@@ -120,7 +118,7 @@ public class UserInterface{
         center.setOpaque(true);
 
         /*Create main grid of game map*/
-        tempGameGrid = Utilities.createBigGrid(center);
+        JLabel[] tempGameGrid = Utilities.createBigGrid(center);
 
         /*Create smaller grids*/
         int j = 0 ;
@@ -362,24 +360,26 @@ public class UserInterface{
                                 if(text.equals(set.toString())){
                                     isMoveCorrect[1][i][j].setBackground(new Color (0,128,255));
                                     isMoveCorrect[1][i][j].verify = true;
+                                    blueColors.add(isMoveCorrect[1][i][j]);
                                 }
                             }
                         }
                         isVerify = true;
                     }
                     else{
-                        for(int i =0; i < 9; i++){
-                            for( int j =0; j < 9; j++){
-                                isMoveCorrect[1][i][j].verify = false;
-                                if(isMoveCorrect[1][i][j].isPreset){
-                                    isMoveCorrect[1][i][j].setBackground(new Color (230,230,230));
-                                }
-                                else{
-                                    isMoveCorrect[1][i][j].setBackground(new Color (255,255,255));
-                                }
+                        for(Field b : blueColors){
+                            b.verify = false;
+                            if(b.isPreset){
+                                b.setBackground(new Color (230,230,230));
+                            }
+                            else{
+                                b.setBackground(new Color (255,255,255));
                             }
                         }
-                        activeLabel.setBackground(new Color(240,240,148));
+                        blueColors.clear();
+                        if(activeLabel != null){
+                            activeLabel.setBackground(new Color(240,240,148));
+                        }
                         for(Field f : sameColors){
                             f.setBackground(new Color(240,240,148));
                         }
