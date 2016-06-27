@@ -2,7 +2,7 @@
 A Sudoku clone made with java swing, as part of a semester assignment
 in object oriented Programming ,ce325 University of Thessaly
 
-                        Assignment description
+                            Assignment description
 
 Create a application using javas swing environment that implements
 a Sudoku clone. The application contains a menu bar , consisting of
@@ -37,21 +37,21 @@ values should be gray. Fields with gray background have to keep that color for
 the entire game length.
 
 The game rules are as follows:
-1. The user chooses a field. The field changes its color to light yellow. Fields
+- The user chooses a field. The field changes its color to light yellow. Fields
 with the same number also become yellow, whether their value is fixed or not.
-2. After choosing a field, the user can click any number button to write into it.
-3. If the user clicks on a field with a non-fixed value and then clicks the erase
+- After choosing a field, the user can click any number button to write into it.
+- If the user clicks on a field with a non-fixed value and then clicks the erase
 button, the value of the field is erased. This should not happen when trying to
 erase fixed values.
-4. If the user enters a value into a field that is against the Sudoku rules, the
+- If the user enters a value into a field that is against the Sudoku rules, the
 field clicked and the other fields that are also part of this violation of rules,
 should be marked with a red color. Sudoku rules state that any two same numbers
 shall not be in the same row, column or box. The sudoku grid consists of 9 boxes.
-5. Choosing the undo button must result in undoing previous entries of the user
+- Choosing the undo button must result in undoing previous entries of the user
 in the exact reverse order the user did them.
-6. If the user clicks on the checkox "Check against solution", then each field
+- If the user clicks on the checkox "Check against solution", then each field
 that has the same number as the puzzle's solution must be marked with a blue
 color background. The blue backgound of such fields must not change while the
 checkbox remains active.
-7. If the user clicks on the solution button, the solution will be shown on the
+- If the user clicks on the solution button, the solution will be shown on the
 screen and all other buttons must be deactivated.
