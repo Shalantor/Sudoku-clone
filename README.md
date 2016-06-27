@@ -2,7 +2,7 @@
 A Sudoku clone made with java swing, as part of a semester assignment
 in object oriented Programming ,ce325 University of Thessaly
 
-                            Assignment description
+Assignment description
 
 Create a application using javas swing environment that implements
 a Sudoku clone. The application contains a menu bar , consisting of
