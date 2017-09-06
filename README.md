@@ -2,6 +2,8 @@
 A Sudoku clone made with java swing, as part of a semester assignment
 in object oriented Programming ,ce325 University of Thessaly
 
+####Usage: Start the file Sudoku.java
+
 Assignment description
 
 Create a application using javas swing environment that implements
@@ -61,4 +63,3 @@ Screenshots:
 ![empty](https://cloud.githubusercontent.com/assets/14819781/17597436/71e70146-5ffe-11e6-8c3c-9d14f264fbd8.png)
 
 ![empty1](https://cloud.githubusercontent.com/assets/14819781/17597450/7eba3c6c-5ffe-11e6-9792-1b1c70282be8.png)
-
