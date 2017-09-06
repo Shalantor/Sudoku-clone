@@ -4,6 +4,7 @@ import javax.swing.border.*;
 import java.util.*;
 import java.awt.image.*;
 
+/*Utility class*/
 public class Utilities{
 
     static private final int GRID = 9;
@@ -16,6 +17,7 @@ public class Utilities{
         for(int i=0 ; i < GRID ; i++){
             labelArray[i] = new JLabel();
             labelArray[i].setBorder(new BevelBorder(BevelBorder.RAISED));
+            /*Add labelArray to parent label*/
             label.add(labelArray[i]);
         }
 
@@ -134,9 +136,8 @@ public class Utilities{
         Field[][] checkSameBox = new Field[9][9];
         Field[][] checkSameRowOrColumn = new Field[9][9];
 
-        /*First create 2darray based on squares*/
+        /*First create 2DArray where each array represents the fields in the same 3x3 box*/
         for(; iterator < board.length; iterator++){
-            //System.out.println("ROW " + row + "COLUMN " + column);
             checkSameBox[row][column] = board[iterator];
             board[iterator].xCoordinate = row;
             board[iterator].yCoordinate = column;
@@ -147,7 +148,7 @@ public class Utilities{
             }
         }
 
-        /*Then create 2dArray based on columns and rows*/
+        /*Then create 2dArray representing columns and rows*/
         row = 0;
         column = 0;
         int box = 0,boxRow = 0;
@@ -157,7 +158,6 @@ public class Utilities{
         int times = 3;
 
         while(true){
-            //System.out.println("BOX: " + box + " BOXROW: " + boxRow);
             checkSameRowOrColumn[row][column] = checkSameBox[box][boxRow];
             /*Update positions of first array*/
             column++;
@@ -177,13 +177,11 @@ public class Utilities{
             }
             boxRow += rowUpperBound;
             if(column == 0){
-                //System.out.println("Changing boxrow");
                 rowUpperBound += 3;
                 boxRow = rowUpperBound;
             }
             /*Case where we have processed 3 times consecutively the rows*/
             if(row == times){
-                //System.out.println("Changing row");
                 times += 3;
                 boxUpperBound += 3;
                 rowUpperBound = 0;

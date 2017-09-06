@@ -1,7 +1,9 @@
 import javax.swing.*;
 
+/*A list of UndoEntries is stored, to be able to Undo moves while playing*/
 public class UndoEntry{
 
+    /*Save the label and the respective text in it*/
     private JLabel label;
     private String text;
 

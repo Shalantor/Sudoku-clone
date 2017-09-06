@@ -127,7 +127,7 @@ public class UserInterface{
             j++;
         }
 
-        /*Add ActionListener to labels*/
+        /*Add ActionListener to labels, which are the fields for the numbers*/
         for(Field label : gameGrid){
             label.addMouseListener(new MouseListener(){
                 public void mouseClicked(MouseEvent e){
@@ -187,7 +187,7 @@ public class UserInterface{
 
         center.validate();
 
-        /*Creating label at bottom, which will be used fot the buttons*/
+        /*Creating label at bottom, which will be used for the buttons*/
         JLabel bottomLabel = new JLabel();
         sudoku.add(bottomLabel,BorderLayout.SOUTH);
         bottomLabel.setPreferredSize(new Dimension(width,height/6));
@@ -448,7 +448,6 @@ public class UserInterface{
                 row = 0;                            //row in  big grid
                 position = adjRow;
             }
-            //TODO:check if text can be centered with a better method than adding spaces*/
 
             for(int i = 0; i < line.length(); i++){
                 if( line.charAt(i) != '.'){
